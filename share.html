@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Dost Ko Dikhao</title>
+
+<link
+rel="stylesheet"
+href="../style.css">
+
+<style>
+
+.share-box {
+    text-align: center;
+}
+
+.share-card {
+    background: #f7f7f7;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.share-icon {
+    font-size: 60px;
+}
+
+.share-button {
+    background: #222;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+KAPDA <span>VERSE</span>
+</div>
+
+
+<div class="card">
+
+<div class="share-box">
+
+<h1>
+📱 Dost Ko Dikhao
+</h1>
+
+<p class="subtitle">
+Show your outfit to your friends.
+</p>
+
+
+<div class="share-card">
+
+<div class="share-icon">
+👕✨
+</div>
+
+<h2>
+My Kapda Verse Outfit
+</h2>
+
+<p>
+What do you think of my look? 😎
+</p>
+
+</div>
+
+
+<button
+onclick="shareWhatsApp()"
+class="share-button">
+
+📱 Share on WhatsApp
+
+</button>
+
+
+<button onclick="copyMessage()">
+
+📋 Copy Message
+
+</button>
+
+
+<p
+id="status"
+style="margin-top:15px;color:#777;">
+</p>
+
+
+<button onclick="goBack()">
+
+← Back to Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+const message =
+"👕✨ Check out my outfit on KAPDA VERSE!\n\n" +
+"What do you think of my look? 😎";
+
+
+function shareWhatsApp() {
+
+
+const whatsappURL =
+"https://wa.me/?text=" +
+encodeURIComponent(
+message
+);
+
+
+window.open(
+whatsappURL,
+"_blank"
+);
+
+}
+
+
+function copyMessage() {
+
+
+navigator.clipboard
+.writeText(message)
+.then(
+function() {
+
+document.getElementById(
+"status"
+).innerText =
+"✅ Message copied!";
+
+}
+);
+
+}
+
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

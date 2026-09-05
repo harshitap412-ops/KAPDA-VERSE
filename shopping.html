@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="Kapda Verse Smart Shopping - personalized wardrobe shopping suggestions.">
+
+<title>KAPDA VERSE | Smart Shopping</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.profile-box {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    line-height: 1.7;
+    margin-top: 20px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.summary-card {
+    background: #f7f7f7;
+    padding: 16px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.summary-number {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.summary-label {
+    color: #777;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.weather-box {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-title {
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    color: #777;
+    line-height: 1.5;
+}
+
+.shopping-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.shopping-card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+}
+
+.product-image {
+    width: 100%;
+    height: 170px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+.product-content {
+    padding: 17px;
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+.product-reason {
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.priority {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 12px;
+    background: #f7f7f7;
+}
+
+.high {
+    color: #c62828;
+}
+
+.medium {
+    color: #e65100;
+}
+
+.good {
+    color: #238636;
+}
+
+.shop-button {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    text-align: center;
+    text-decoration: none;
+    background: #222;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.shop-button:hover {
+    opacity: 0.85;
+}
+
+.coming-soon {
+    background: #eeeeee;
+    color: #555;
+    cursor: default;
+}
+
+.coming-soon:hover {
+    opacity: 1;
+}
+
+.disclosure {
+    background: #fff8e1;
+    border: 1px solid #f0d98c;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 25px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.earning-box {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.earning-box h3 {
+    margin-top: 0;
+}
+
+.empty-box {
+    text-align: center;
+    color: #777;
+    padding: 25px;
+    line-height: 1.6;
+    background: #f7f7f7;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+
+    .shopping-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>🛒 Smart Shopping</h1>
+
+
+<p class="subtitle">
+
+Tumhari wardrobe ko analyze karke
+Kapda Verse useful shopping categories
+suggest karta hai.
+
+</p>
+
+
+<!-- PROFILE -->
+
+<div
+id="profileBox"
+class="profile-box">
+
+Loading profile...
+
+</div>
+
+
+<!-- WARDROBE SUMMARY -->
+
+<h2 class="section-title">
+
+📊 Your Wardrobe
+
+</h2>
+
+
+<div class="summary-grid">
+
+
+<div class="summary-card">
+
+<div
+id="totalItems"
+class="summary-number">
+
+0
+
+</div>
+
+<div class="summary-label">
+
+Total Clothes
+
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div
+id="usedCategories"
+class="summary-number">
+
+0
+
+</div>
+
+<div class="summary-label">
+
+Categories Used
+
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div
+id="strongCategories"
+class="summary-number">
+
+0
+
+</div>
+
+<div class="summary-label">
+
+Well Covered
+
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div
+id="weakCategories"
+class="summary-number">
+
+0
+
+</div>
+
+<div class="summary-label">
+
+Need More
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- WEATHER -->
+
+<div class="weather-box">
+
+<h2>🌦️ Weather Check</h2>
+
+<div id="weatherInfo">
+
+Checking weather...
+
+</div>
+
+</div>
+
+
+<!-- SHOPPING -->
+
+<h2 class="section-title">
+
+🛍️ Recommended Shopping
+
+</h2>
+
+
+<p class="section-subtitle">
+
+Kapda Verse pehle tumhari existing wardrobe
+check karta hai, phir low-stock categories
+suggest karta hai.
+
+</p>
+
+
+<div
+id="suggestions"
+class="shopping-grid">
+
+</div>
+
+
+<!-- EARNING INFO -->
+
+<div class="earning-box">
+
+<h3>
+
+💰 How Kapda Verse Can Earn
+
+</h3>
+
+<p style="color:#666;line-height:1.6;">
+
+Future mein recommended products ke
+<strong>Shop Now</strong> buttons ko approved
+affiliate links se connect kiya ja sakta hai.
+
+Eligible purchase hone par Kapda Verse
+commission earn kar sakta hai.
+
+</p>
+
+<p style="color:#777;font-size:13px;">
+
+Affiliate links are not active yet.
+
+</p>
+
+</div>
+
+
+<!-- DISCLOSURE -->
+
+<div class="disclosure">
+
+<strong>💡 Shopping Disclosure</strong>
+
+<br><br>
+
+Some shopping links on Kapda Verse may be
+affiliate links. If you purchase through an
+eligible link, Kapda Verse may earn a commission
+at no extra cost to you.
+
+<br><br>
+
+<strong>
+
+As an Amazon Associate I earn from qualifying purchases.
+
+</strong>
+
+</div>
+
+
+<button
+onclick="goBudget()">
+
+💰 Check Shopping Budget
+
+</button>
+
+
+<button
+onclick="goBack()">
+
+← Back to Dashboard
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ==========================================
+// PROFILE
+// ==========================================
+
+const profile =
+JSON.parse(
+
+localStorage.getItem(
+"kapdaVerseProfile"
+)
+
+);
+
+
+if (!profile) {
+
+window.location.href =
+"../index.html";
+
+}
+
+
+// ==========================================
+// PROFILE DISPLAY
+// ==========================================
+
+document.getElementById(
+"profileBox"
+).innerHTML = `
+
+<strong>👤 Your Style Profile</strong>
+
+<br>
+
+Gender: ${profile.gender}
+
+<br>
+
+Skin Tone: ${profile.skinTone}
+
+<br>
+
+Body Shape: ${profile.bodyShape}
+
+<br>
+
+Face Shape: ${profile.faceShape}
+
+`;
+
+
+// ==========================================
+// CATEGORIES
+// ==========================================
+
+let categories = [];
+
+
+if (profile.gender === "male") {
+
+categories = [
+
+"tshirts",
+"shirts",
+"jeans",
+"trousers",
+"kurtas",
+"jackets"
+
+];
+
+}
+
+else if (profile.gender === "female") {
+
+categories = [
+
+"tops",
+"jeans",
+"kurtis",
+"sarees",
+"lehengas",
+"dresses"
+
+];
+
+}
+
+else {
+
+categories = [
+
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+
+];
+
+}
+
+
+// ==========================================
+// CATEGORY NAMES
+// ==========================================
+
+const categoryNames = {
+
+tshirts:
+"T-Shirts",
+
+shirts:
+"Shirts",
+
+jeans:
+"Jeans",
+
+trousers:
+"Trousers",
+
+kurtas:
+"Kurtas",
+
+jackets:
+"Jackets",
+
+tops:
+"Tops",
+
+kurtis:
+"Kurtis",
+
+sarees:
+"Sarees",
+
+lehengas:
+"Lehengas",
+
+dresses:
+"Dresses",
+
+casual:
+"Casual Wear"
+
+};
+
+
+// ==========================================
+// AFFILIATE-READY PRODUCT DATA
+// ==========================================
+//
+// IMPORTANT:
+// Keep affiliateUrl empty until you have
+// your REAL approved affiliate link.
+//
+// Later replace:
+// affiliateUrl: ""
+//
+// with:
+// affiliateUrl: "YOUR_REAL_LINK"
+//
+// ==========================================
+
+const shoppingProducts = {
+
+tshirts: {
+
+title:
+"Everyday T-Shirt",
+
+emoji:
+"👕",
+
+description:
+"A versatile T-shirt for casual and college looks.",
+
+reason:
+"T-Shirts are useful for everyday styling and easy outfit combinations.",
+
+affiliateUrl:
+""
+
+},
+
+shirts: {
+
+title:
+"Casual / Smart Shirt",
+
+emoji:
+"👔",
+
+description:
+"A versatile shirt for casual and smart-casual outfits.",
+
+reason:
+"Shirts can give your wardrobe both relaxed and polished options.",
+
+affiliateUrl:
+""
+
+},
+
+jeans: {
+
+title:
+"Classic Jeans",
+
+emoji:
+"👖",
+
+description:
+"A versatile jeans option for everyday outfits.",
+
+reason:
+"Jeans can be paired with multiple tops and shirts.",
+
+affiliateUrl:
+""
+
+},
+
+trousers: {
+
+title:
+"Smart Trousers",
+
+emoji:
+"👖",
+
+description:
+"Useful for formal and smart-casual styling.",
+
+reason:
+"Trousers give you more options beyond everyday jeans.",
+
+affiliateUrl:
+""
+
+},
+
+kurtas: {
+
+title:
+"Everyday Kurta",
+
+emoji:
+"🥻",
+
+description:
+"A comfortable ethnic option for everyday and festive styling.",
+
+reason:
+"A kurta can add an ethnic option to your wardrobe.",
+
+affiliateUrl:
+""
+
+},
+
+jackets: {
+
+title:
+"Casual Jacket",
+
+emoji:
+"🧥",
+
+description:
+"A layering piece for cooler weather and stylish outfits.",
+
+reason:
+"Jackets are useful when you want an extra layering option.",
+
+affiliateUrl:
+""
+
+},
+
+tops: {
+
+title:
+"Everyday Top",
+
+emoji:
+"👚",
+
+description:
+"A versatile top for college and casual outfits.",
+
+reason:
+"Tops can create multiple everyday combinations.",
+
+affiliateUrl:
+""
+
+},
+
+kurtis: {
+
+title:
+"Versatile Kurti",
+
+emoji:
+"👗",
+
+description:
+"A comfortable option for everyday and semi-formal looks.",
+
+reason:
+"Kurtis can work for college, casual and semi-formal occasions.",
+
+affiliateUrl:
+""
+
+},
+
+sarees: {
+
+title:
+"Classic Saree",
+
+emoji:
+"🥻",
+
+description:
+"A traditional option for festive and special occasions.",
+
+reason:
+"A saree adds a traditional outfit option to your wardrobe.",
+
+affiliateUrl:
+""
+
+},
+
+lehengas: {
+
+title:
+"Festive Lehenga",
+
+emoji:
+"👗",
+
+description:
+"A special-occasion outfit for celebrations and functions.",
+
+reason:
+"A lehenga can cover festive and function wear needs.",
+
+affiliateUrl:
+""
+
+},
+
+dresses: {
+
+title:
+"Versatile Dress",
+
+emoji:
+"👗",
+
+description:
+"An easy complete-outfit option for casual and special occasions.",
+
+reason:
+"A dress gives you a complete look without needing separate pieces.",
+
+affiliateUrl:
+""
+
+},
+
+casual: {
+
+title:
+"Casual Wear",
+
+emoji:
+"👕",
+
+description:
+"A flexible casual outfit option for everyday use.",
+
+reason:
+"Extra casual options make everyday outfit planning easier.",
+
+affiliateUrl:
+""
+
+}
+
+};
+
+
+// ==========================================
+// GET WARDROBE
+// ==========================================
+
+function getWardrobe() {
+
+let wardrobe = [];
+
+
+categories.forEach(
+function(category) {
+
+const items =
+JSON.parse(
+
+localStorage.getItem(
+"kapdaVerse_" +
+category
+) || "[]"
+
+);
+
+
+items.forEach(
+function(item) {
+
+wardrobe.push({
+
+...item,
+
+category:
+category
+
+});
+
+});
+
+});
+
+
+return wardrobe;
+
+}
+
+
+// ==========================================
+// CATEGORY COUNT
+// ==========================================
+
+function getCount(
+wardrobe,
+category
+) {
+
+return wardrobe.filter(
+
+function(item) {
+
+return item.category ===
+category;
+
+}
+
+).length;
+
+}
+
+
+// ==========================================
+// WEATHER
+// ==========================================
+
+function loadWeather() {
+
+
+if (!navigator.geolocation) {
+
+document.getElementById(
+"weatherInfo"
+).innerText =
+"Weather unavailable.";
+
+generateSuggestions(
+null,
+false
+);
+
+return;
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position) {
+
+
+const latitude =
+position.coords.latitude;
+
+
+const longitude =
+position.coords.longitude;
+
+
+const url =
+
+"https://api.open-meteo.com/v1/forecast" +
+
+"?latitude=" +
+latitude +
+
+"&longitude=" +
+longitude +
+
+"&current=temperature_2m,precipitation,rain,weather_code" +
+
+"&timezone=auto";
+
+
+fetch(url)
+
+.then(
+function(response) {
+
+return response.json();
+
+})
+
+.then(
+function(data) {
+
+
+const current =
+data.current;
+
+
+const temperature =
+current.temperature_2m;
+
+
+const rain =
+current.rain > 0 ||
+current.precipitation > 0;
+
+
+document.getElementById(
+"weatherInfo"
+).innerHTML = `
+
+<strong>
+
+${temperature}°C
+
+</strong>
+
+<br>
+
+${rain
+? "🌧️ Rainy conditions"
+: "☀️ No rain detected"}
+
+`;
+
+
+generateSuggestions(
+temperature,
+rain
+);
+
+})
+
+.catch(
+function() {
+
+document.getElementById(
+"weatherInfo"
+).innerText =
+"Weather data unavailable.";
+
+generateSuggestions(
+null,
+false
+);
+
+});
+
+},
+
+function() {
+
+document.getElementById(
+"weatherInfo"
+).innerText =
+"Location permission not available.";
+
+generateSuggestions(
+null,
+false
+);
+
+}
+
+);
+
+}
+
+
+// ==========================================
+// SHOPPING SUGGESTIONS
+// ==========================================
+
+function generateSuggestions(
+temperature,
+rain
+) {
+
+
+const wardrobe =
+getWardrobe();
+
+
+const container =
+document.getElementById(
+"suggestions"
+);
+
+
+// ==========================================
+// SUMMARY
+// ==========================================
+
+document.getElementById(
+"totalItems"
+).innerText =
+wardrobe.length;
+
+
+let used = 0;
+
+let wellCovered = 0;
+
+let needMore = 0;
+
+
+categories.forEach(
+function(category) {
+
+const count =
+getCount(
+wardrobe,
+category
+);
+
+
+if (count > 0) {
+
+used++;
+
+}
+
+
+if (count >= 2) {
+
+wellCovered++;
+
+}
+
+
+if (count < 2) {
+
+needMore++;
+
+}
+
+});
+
+
+document.getElementById(
+"usedCategories"
+).innerText =
+used;
+
+
+document.getElementById(
+"strongCategories"
+).innerText =
+wellCovered;
+
+
+document.getElementById(
+"weakCategories"
+).innerText =
+needMore;
+
+
+// ==========================================
+// EMPTY WARDROBE
+// ==========================================
+
+if (!wardrobe.length) {
+
+container.className =
+"";
+
+container.innerHTML = `
+
+<div class="empty-box">
+
+<h3>👕 Your Almirah is empty</h3>
+
+<p>
+
+Pehle My Almirah mein apne clothes upload karo.
+
+<br><br>
+
+Uske baad Kapda Verse tumhari wardrobe
+ke basis par shopping suggestions dega.
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+// ==========================================
+// PRIORITY
+// ==========================================
+
+let priorities = [];
+
+
+if (profile.gender === "male") {
+
+priorities = [
+
+"shirts",
+"jeans",
+"tshirts",
+"trousers",
+"jackets",
+"kurtas"
+
+];
+
+}
+
+else if (profile.gender === "female") {
+
+priorities = [
+
+"tops",
+"jeans",
+"kurtis",
+"dresses",
+"sarees",
+"lehengas"
+
+];
+
+}
+
+else {
+
+priorities = [
+
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+
+];
+
+}
+
+
+// ==========================================
+// WEATHER BOOST
+// ==========================================
+
+if (
+temperature !== null &&
+temperature >= 32
+) {
+
+const hotCategories = [
+
+"tshirts",
+"tops",
+"dresses",
+"jeans"
+
+];
+
+
+priorities.sort(
+
+function(a, b) {
+
+return (
+
+(hotCategories.includes(b) ? 1 : 0) -
+
+(hotCategories.includes(a) ? 1 : 0)
+
+);
+
+});
+
+}
+
+
+if (rain) {
+
+const rainCategories = [
+
+"tshirts",
+"tops",
+"jeans",
+"kurtis"
+
+];
+
+
+priorities.sort(
+
+function(a, b) {
+
+return (
+
+(rainCategories.includes(b) ? 1 : 0) -
+
+(rainCategories.includes(a) ? 1 : 0)
+
+);
+
+});
+
+}
+
+
+// ==========================================
+// ONLY LOW CATEGORIES
+// ==========================================
+
+const recommended =
+priorities.filter(
+
+function(category) {
+
+return getCount(
+wardrobe,
+category
+) < 2;
+
+}
+
+);
+
+
+// ==========================================
+// EVERYTHING COVERED
+// ==========================================
+
+if (!recommended.length) {
+
+container.className =
+"";
+
+container.innerHTML = `
+
+<div class="empty-box">
+
+<h3>🎉 Your wardrobe looks well covered!</h3>
+
+<p>
+
+Abhi kisi category ki urgent need nahi dikh rahi.
+
+<br><br>
+
+Random shopping karne ke bajay
+existing clothes ko mix & match karke
+new outfits try karo. ✨
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+// ==========================================
+// CREATE SHOPPING CARDS
+// ==========================================
+
+container.className =
+"shopping-grid";
+
+
+container.innerHTML = "";
+
+
+recommended
+.slice(0, 4)
+.forEach(
+
+function(category, index) {
+
+
+const count =
+getCount(
+wardrobe,
+category
+);
+
+
+const product =
+shoppingProducts[
+category
+];
+
+
+const isAffiliateReady =
+product.affiliateUrl &&
+product.affiliateUrl.trim() !== "";
+
+
+const priority =
+count === 0
+? "high"
+: "medium";
+
+
+const priorityText =
+count === 0
+? "🔴 High Priority"
+: "🟠 Could Add More";
+
+
+const card =
+document.createElement(
+"div"
+);
+
+
+card.className =
+"shopping-card";
+
+
+let buttonHTML;
+
+
+if (isAffiliateReady) {
+
+buttonHTML = `
+
+<a
+
+href="${product.affiliateUrl}"
+
+class="shop-button"
+
+target="_blank"
+
+rel="nofollow sponsored noopener"
+
+onclick="trackShopClick('${category}')"
+
+>
+
+🛍️ Shop Now
+
+</a>
+
+`;
+
+}
+
+else {
+
+buttonHTML = `
+
+<div class="shop-button coming-soon">
+
+🛍️ Shop Link Coming Soon
+
+</div>
+
+`;
+
+}
+
+
+card.innerHTML = `
+
+<div class="product-image">
+
+${product.emoji}
+
+</div>
+
+
+<div class="product-content">
+
+
+<div class="product-title">
+
+${index === 0
+? "🏆 "
+: ""}
+
+${product.title}
+
+</div>
+
+
+<div class="product-description">
+
+${product.description}
+
+</div>
+
+
+<div class="product-reason">
+
+<strong>
+
+Why this?
+
+</strong>
+
+<br>
+
+${product.reason}
+
+<br><br>
+
+You currently have:
+
+<strong>
+
+${count}
+
+</strong>
+
+${categoryNames[category]}
+
+</div>
+
+
+<div class="priority ${priority}">
+
+${priorityText}
+
+</div>
+
+
+${buttonHTML}
+
+
+</div>
+
+`;
+
+
+container.appendChild(
+card
+);
+
+});
+
+}
+
+
+// ==========================================
+// AFFILIATE CLICK TRACKING
+// ==========================================
+
+function trackShopClick(
+category
+) {
+
+
+let clicks =
+JSON.parse(
+
+localStorage.getItem(
+"kapdaVerseShopClicks"
+) || "[]"
+
+);
+
+
+clicks.push({
+
+category:
+category,
+
+time:
+new Date().toISOString()
+
+});
+
+
+localStorage.setItem(
+
+"kapdaVerseShopClicks",
+
+JSON.stringify(clicks)
+
+);
+
+}
+
+
+// ==========================================
+// BUTTONS
+// ==========================================
+
+function goBudget() {
+
+window.location.href =
+"budget.html";
+
+}
+
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+
+// ==========================================
+// START
+// ==========================================
+
+loadWeather();
+
+</script>
+
+
+</body>
+
+</html>

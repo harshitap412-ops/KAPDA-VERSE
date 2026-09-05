@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kapda Verse | My Almirah</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .category-button {
+            background: #f7f7f7;
+            color: #222;
+            border: 1px solid #e5e5e5;
+            min-height: 100px;
+            margin-top: 0;
+            font-size: 17px;
+        }
+
+        .category-button:hover {
+            background: #eeeeee;
+            opacity: 1;
+        }
+
+        .category-icon {
+            display: block;
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 500px) {
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        KAPDA <span>VERSE</span>
+    </div>
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+        <h1 id="pageTitle">
+            My Almirah 👕
+        </h1>
+
+        <p class="subtitle" id="pageSubtitle">
+            Your personalized wardrobe
+        </p>
+
+
+        <!-- CATEGORY GRID -->
+
+        <div
+            id="categories"
+            class="category-grid">
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <button onclick="goToDashboard()">
+            ← Back to Dashboard
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+// ==========================================
+// GET PROFILE
+// ==========================================
+
+const savedProfile =
+    localStorage.getItem("kapdaVerseProfile");
+
+
+if (!savedProfile) {
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+const profile =
+    JSON.parse(savedProfile);
+
+
+// ==========================================
+// HTML ELEMENTS
+// ==========================================
+
+const pageTitle =
+    document.getElementById("pageTitle");
+
+const pageSubtitle =
+    document.getElementById("pageSubtitle");
+
+const categories =
+    document.getElementById("categories");
+
+
+// ==========================================
+// MEN'S CATEGORIES
+// ==========================================
+
+const mensCategories = [
+
+    {
+        name: "T-Shirts",
+        icon: "👕",
+        file: "mens.html?category=tshirts"
+    },
+
+    {
+        name: "Shirts",
+        icon: "👔",
+        file: "mens.html?category=shirts"
+    },
+
+    {
+        name: "Jeans",
+        icon: "👖",
+        file: "mens.html?category=jeans"
+    },
+
+    {
+        name: "Trousers",
+        icon: "👖",
+        file: "mens.html?category=trousers"
+    },
+
+    {
+        name: "Kurtas",
+        icon: "🥻",
+        file: "mens.html?category=kurtas"
+    },
+
+    {
+        name: "Jackets",
+        icon: "🧥",
+        file: "mens.html?category=jackets"
+    }
+
+];
+
+
+// ==========================================
+// WOMEN'S CATEGORIES
+// ==========================================
+
+const womensCategories = [
+
+    {
+        name: "Tops",
+        icon: "👚",
+        file: "womens.html?category=tops"
+    },
+
+    {
+        name: "Jeans",
+        icon: "👖",
+        file: "womens.html?category=jeans"
+    },
+
+    {
+        name: "Kurtis",
+        icon: "👗",
+        file: "womens.html?category=kurtis"
+    },
+
+    {
+        name: "Sarees",
+        icon: "🥻",
+        file: "womens.html?category=sarees"
+    },
+
+    {
+        name: "Lehengas",
+        icon: "👗",
+        file: "womens.html?category=lehengas"
+    },
+
+    {
+        name: "Dresses",
+        icon: "👗",
+        file: "womens.html?category=dresses"
+    }
+
+];
+
+
+// ==========================================
+// UNISEX CATEGORIES
+// ==========================================
+
+const unisexCategories = [
+
+    {
+        name: "T-Shirts",
+        icon: "👕",
+        file: "mens.html?category=tshirts"
+    },
+
+    {
+        name: "Jeans",
+        icon: "👖",
+        file: "mens.html?category=jeans"
+    },
+
+    {
+        name: "Jackets",
+        icon: "🧥",
+        file: "mens.html?category=jackets"
+    },
+
+    {
+        name: "Casual Wear",
+        icon: "👟",
+        file: "mens.html?category=casual"
+    }
+
+];
+
+
+// ==========================================
+// CREATE CATEGORY BUTTON
+// ==========================================
+
+function createCategory(item) {
+
+    const button =
+        document.createElement("button");
+
+
+    button.className =
+        "category-button";
+
+
+    button.innerHTML =
+        '<span class="category-icon">' +
+        item.icon +
+        '</span>' +
+        item.name;
+
+
+    button.onclick = function() {
+
+        window.location.href =
+            "clothes/" + item.file;
+
+    };
+
+
+    categories.appendChild(button);
+
+}
+
+
+// ==========================================
+// MALE USER
+// ==========================================
+
+if (profile.gender === "male") {
+
+    pageTitle.innerText =
+        "My Men's Almirah 👔";
+
+    pageSubtitle.innerText =
+        "Choose a clothing category";
+
+    mensCategories.forEach(
+        createCategory
+    );
+
+}
+
+
+// ==========================================
+// FEMALE USER
+// ==========================================
+
+else if (profile.gender === "female") {
+
+    pageTitle.innerText =
+        "My Women's Almirah 👗";
+
+    pageSubtitle.innerText =
+        "Choose a clothing category";
+
+    womensCategories.forEach(
+        createCategory
+    );
+
+}
+
+
+// ==========================================
+// OTHER USER
+// ==========================================
+
+else {
+
+    pageTitle.innerText =
+        "My Almirah 👕";
+
+    pageSubtitle.innerText =
+        "Choose a clothing category";
+
+    unisexCategories.forEach(
+        createCategory
+    );
+
+}
+
+
+// ==========================================
+// BACK TO DASHBOARD
+// ==========================================
+
+function goToDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

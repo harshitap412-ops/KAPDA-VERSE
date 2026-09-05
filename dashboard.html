@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kapda Verse | Dashboard</title>
+<link rel="stylesheet" href="../style.css">
+
+<style>
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.profile-info {
+    color: #777;
+    line-height: 1.7;
+    margin-top: 10px;
+}
+
+.weather-box {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.weather-temp {
+    font-size: 35px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.weather-info {
+    color: #666;
+    line-height: 1.6;
+}
+
+.suggestion {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #777;
+    font-size: 14px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.feature-button {
+    min-height: 90px;
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.outfit-box {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.outfit-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.outfit-item {
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.empty {
+    color: #777;
+    line-height: 1.5;
+}
+
+@media (max-width: 500px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        KAPDA <span>VERSE</span>
+    </div>
+
+    <div class="card">
+
+        <div class="dashboard-header">
+
+            <div class="welcome" id="welcomeText">
+                Welcome 👋
+            </div>
+
+            <div class="profile-info" id="profileInfo">
+            </div>
+
+        </div>
+
+
+        <!-- WEATHER -->
+
+        <div class="weather-box">
+
+            <h2>🌦️ Today's Weather</h2>
+
+            <div class="weather-temp" id="temperature">
+                Loading...
+            </div>
+
+            <div class="weather-info" id="weatherInfo">
+                Getting your weather...
+            </div>
+
+            <div class="suggestion" id="weatherSuggestion">
+                👕 Preparing your outfit suggestion...
+            </div>
+
+        </div>
+
+
+        <!-- WARDROBE STATS -->
+
+        <h2 style="margin-top:30px;">
+            👕 My Wardrobe
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-number" id="totalClothes">
+                    0
+                </div>
+                <div class="stat-label">
+                    Total Clothes
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="freshClothes">
+                    0
+                </div>
+                <div class="stat-label">
+                    Fresh Choices
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="recentClothes">
+                    0
+                </div>
+                <div class="stat-label">
+                    Recently Worn
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="categoryCount">
+                    0
+                </div>
+                <div class="stat-label">
+                    Categories Used
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- SMART OUTFIT -->
+
+        <div class="outfit-box">
+
+            <div class="outfit-title">
+                ✨ Today's Smart Outfit
+            </div>
+
+            <div id="outfitSuggestion">
+                Checking your wardrobe...
+            </div>
+
+        </div>
+
+
+        <!-- FEATURES -->
+
+        <h2 style="margin-top:30px;">
+            ✨ Kapda Verse Features
+        </h2>
+
+        <div class="feature-grid">
+
+            <button
+                class="feature-button"
+                onclick="goTo('almirah.html')">
+                👕<br>
+                My Almirah
+            </button>
+
+            <button
+                class="feature-button"
+                onclick="goTo('chat.html')">
+                🤖<br>
+                AI Fashion Stylist
+            </button>
+
+            <button
+                class="feature-button"
+                onclick="goTo('budget.html')">
+                💰<br>
+                Budget Check
+            </button>
+
+            <button
+                class="feature-button"
+                onclick="goTo('share.html')">
+                📱<br>
+                Dost Ko Dikhao
+            </button>
+
+            <button
+                class="feature-button"
+                onclick="personalStyling()">
+                ✨<br>
+                Personal Styling
+            </button>
+
+        </div>
+
+
+        <button onclick="editProfile()">
+            ⚙️ Edit Profile
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const savedProfile =
+    localStorage.getItem("kapdaVerseProfile");
+
+
+if (!savedProfile) {
+
+    window.location.href = "../index.html";
+
+}
+
+
+const profile =
+    JSON.parse(savedProfile);
+
+
+// ---------------- PROFILE ----------------
+
+document.getElementById("welcomeText").innerText =
+    "Hey " + profile.name + "! 👋";
+
+
+let genderText = "Gender-neutral";
+
+if (profile.gender === "male") {
+
+    genderText = "Men's";
+
+}
+
+else if (profile.gender === "female") {
+
+    genderText = "Women's";
+
+}
+
+
+document.getElementById("profileInfo").innerText =
+    genderText +
+    " fashion • " +
+    profile.skinTone +
+    " skin tone • " +
+    profile.bodyShape +
+    " body shape • " +
+    profile.faceShape +
+    " face shape • " +
+    profile.hairStyle +
+    " hair";
+
+
+// ---------------- CLOTHING DATA ----------------
+
+const maleCategories = [
+    "tshirts",
+    "shirts",
+    "jeans",
+    "trousers",
+    "kurtas",
+    "jackets"
+];
+
+const femaleCategories = [
+    "tops",
+    "jeans",
+    "kurtis",
+    "sarees",
+    "lehengas",
+    "dresses"
+];
+
+const unisexCategories = [
+    "tshirts",
+    "jeans",
+    "jackets",
+    "casual"
+];
+
+
+let categories;
+
+
+if (profile.gender === "male") {
+
+    categories = maleCategories;
+
+}
+
+else if (profile.gender === "female") {
+
+    categories = femaleCategories;
+
+}
+
+else {
+
+    categories = unisexCategories;
+
+}
+
+
+// ---------------- WARDROBE STATS ----------------
+
+let total = 0;
+let fresh = 0;
+let recent = 0;
+let usedCategories = 0;
+
+let allClothes = [];
+
+
+categories.forEach(function(category) {
+
+    const key = "kapdaVerse_" + category;
+
+    const saved =
+        JSON.parse(localStorage.getItem(key) || "[]");
+
+
+    if (saved.length > 0) {
+
+        usedCategories++;
+
+    }
+
+
+    saved.forEach(function(item) {
+
+        total++;
+
+        allClothes.push({
+            category: category,
+            lastWorn: item.lastWorn,
+            image: item.image
+        });
+
+
+        if (
+            item.lastWorn === "Not worn yet" ||
+            item.lastWorn === "1 week ago" ||
+            item.lastWorn === "More than 1 week ago"
+        ) {
+
+            fresh++;
+
+        }
+
+
+        if (
+            item.lastWorn === "Today" ||
+            item.lastWorn === "Yesterday" ||
+            item.lastWorn === "2 days ago" ||
+            item.lastWorn === "3 days ago"
+        ) {
+
+            recent++;
+
+        }
+
+    });
+
+});
+
+
+document.getElementById("totalClothes").innerText =
+    total;
+
+document.getElementById("freshClothes").innerText =
+    fresh;
+
+document.getElementById("recentClothes").innerText =
+    recent;
+
+document.getElementById("categoryCount").innerText =
+    usedCategories;
+
+
+// ---------------- WEATHER ----------------
+
+function getWeatherDescription(code) {
+
+    if (code === 0) return "Clear sky ☀️";
+
+    if (code <= 3) return "Partly cloudy ⛅";
+
+    if (code <= 48) return "Cloudy ☁️";
+
+    if (code <= 67) return "Rainy 🌧️";
+
+    if (code <= 77) return "Snowy ❄️";
+
+    if (code <= 82) return "Rain showers 🌦️";
+
+    if (code >= 95) return "Thunderstorm ⛈️";
+
+    return "Mixed weather 🌤️";
+
+}
+
+
+function showWeather(
+    latitude,
+    longitude
+) {
+
+    const url =
+        "https://api.open-meteo.com/v1/forecast" +
+        "?latitude=" + latitude +
+        "&longitude=" + longitude +
+        "&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code,wind_speed_10m" +
+        "&timezone=auto";
+
+
+    fetch(url)
+
+        .then(function(response) {
+
+            return response.json();
+
+        })
+
+        .then(function(data) {
+
+            const current =
+                data.current;
+
+
+            const temp =
+                Math.round(
+                    current.temperature_2m
+                );
+
+
+            const humidity =
+                current.relative_humidity_2m;
+
+
+            const weather =
+                getWeatherDescription(
+                    current.weather_code
+                );
+
+
+            document.getElementById(
+                "temperature"
+            ).innerText =
+                temp + "°C";
+
+
+            document.getElementById(
+                "weatherInfo"
+            ).innerText =
+                weather +
+                " • Humidity " +
+                humidity +
+                "%";
+
+
+            createWeatherSuggestion(
+                temp,
+                current.weather_code
+            );
+
+        })
+
+        .catch(function() {
+
+            document.getElementById(
+                "temperature"
+            ).innerText =
+                "Weather unavailable";
+
+            document.getElementById(
+                "weatherInfo"
+            ).innerText =
+                "Please check your internet connection.";
+
+        });
+
+}
+
+
+function createWeatherSuggestion(
+    temp,
+    weatherCode
+) {
+
+    let suggestion = "";
+
+
+    const rainy =
+        weatherCode >= 51 &&
+        weatherCode <= 82;
+
+
+    if (rainy) {
+
+        suggestion =
+            "🌧️ Rainy weather: Choose comfortable clothes and avoid delicate outfits. ";
+
+    }
+
+    else if (temp >= 32) {
+
+        suggestion =
+            "☀️ Hot weather: Choose light and breathable clothes. ";
+
+    }
+
+    else if (temp >= 25) {
+
+        suggestion =
+            "🌤️ Warm weather: Go for a comfortable everyday outfit. ";
+
+    }
+
+    else {
+
+        suggestion =
+            "🧥 Cool weather: A shirt, kurta or jacket can work well. ";
+
+    }
+
+
+    if (profile.gender === "female") {
+
+        suggestion +=
+            "Try a Top + Jeans or a comfortable Dress.";
+
+    }
+
+    else if (profile.gender === "male") {
+
+        suggestion +=
+            "Try a T-Shirt + Jeans or Shirt + Trousers.";
+
+    }
+
+    else {
+
+        suggestion +=
+            "Try a T-Shirt + Jeans or a casual layered look.";
+
+    }
+
+
+    document.getElementById(
+        "weatherSuggestion"
+    ).innerText =
+        suggestion;
+
+}
+
+
+// ---------------- LOCATION ----------------
+
+if (
+    navigator.geolocation
+) {
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            showWeather(
+                position.coords.latitude,
+                position.coords.longitude
+            );
+
+        },
+
+        function() {
+
+            document.getElementById(
+                "temperature"
+            ).innerText =
+                "Location needed";
+
+            document.getElementById(
+                "weatherInfo"
+            ).innerText =
+                "Allow location permission to get live weather.";
+
+        }
+
+    );
+
+}
+
+
+// ---------------- SMART OUTFIT ----------------
+
+function getCategoryName(category) {
+
+    const names = {
+
+        tshirts: "T-Shirt",
+
+        shirts: "Shirt",
+
+        jeans: "Jeans",
+
+        trousers: "Trousers",
+
+        kurtas: "Kurta",
+
+        jackets: "Jacket",
+
+        tops: "Top",
+
+        kurtis: "Kurti",
+
+        sarees: "Saree",
+
+        lehengas: "Lehenga",
+
+        dresses: "Dress",
+
+        casual: "Casual Wear"
+
+    };
+
+    return names[category] || category;
+
+}
+
+
+function createOutfitSuggestion() {
+
+    const box =
+        document.getElementById(
+            "outfitSuggestion"
+        );
+
+
+    if (allClothes.length === 0) {
+
+        box.innerHTML =
+            '<div class="empty">' +
+            'Your Almirah is empty right now. 👕<br><br>' +
+            'Upload your own clothes in <b>My Almirah</b> and Kapda Verse will use them for smart suggestions.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    let freshClothes =
+        allClothes.filter(function(item) {
+
+            return (
+                item.lastWorn === "Not worn yet" ||
+                item.lastWorn === "1 week ago" ||
+                item.lastWorn === "More than 1 week ago"
+            );
+
+        });
+
+
+    let choices =
+        freshClothes.length > 0
+            ? freshClothes
+            : allClothes;
+
+
+    const selected =
+        choices[Math.floor(
+            Math.random() * choices.length
+        )];
+
+
+    box.innerHTML =
+        '<div class="outfit-item">' +
+        '👕 <b>' +
+        getCategoryName(selected.category) +
+        '</b><br>' +
+        'Last worn: ' +
+        selected.lastWorn +
+        '</div>';
+
+
+}
+
+
+createOutfitSuggestion();
+
+
+// ---------------- NAVIGATION ----------------
+
+function goTo(page) {
+
+    window.location.href = page;
+
+}
+
+
+// ---------------- PERSONAL STYLING ----------------
+
+function personalStyling() {
+
+    alert(
+        "✨ Personal Styling\n\n" +
+        "Kapda Verse uses your profile details like gender, skin tone, body shape, face shape and hair style to personalize your fashion suggestions."
+    );
+
+}
+
+
+// ---------------- EDIT PROFILE ----------------
+
+function editProfile() {
+
+    window.location.href =
+        "../index.html";
+
+}
+
+</script>
+
+</body>
+</html>

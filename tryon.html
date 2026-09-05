@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Pehno Dekho</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.tryon-header {
+    text-align: center;
+}
+
+.upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 18px;
+    padding: 25px 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.upload-icon {
+    font-size: 50px;
+}
+
+.upload-box input {
+    margin-top: 15px;
+}
+
+.preview-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.preview-section img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: #f5f5f5;
+}
+
+.section-title {
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.clothes-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.cloth-option {
+    background: #f7f7f7;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cloth-option:hover {
+    border-color: #999;
+}
+
+.cloth-option.selected {
+    border-color: #222;
+    box-shadow: 0 0 0 2px #222 inset;
+}
+
+.cloth-option img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 11px;
+}
+
+.cloth-name {
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.last-worn {
+    font-size: 12px;
+    color: #777;
+    margin-top: 4px;
+}
+
+.selected-box {
+    display: none;
+    background: #f7f7f7;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 18px;
+    text-align: center;
+}
+
+.selected-box img {
+    width: 130px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.tryon-button {
+    margin-top: 25px;
+    font-size: 17px;
+}
+
+.result-box {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.result-placeholder {
+    border: 2px dashed #ccc;
+    border-radius: 15px;
+    padding: 35px 15px;
+}
+
+.result-icon {
+    font-size: 55px;
+}
+
+.note {
+    margin-top: 18px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 12px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.empty-message {
+    text-align: center;
+    color: #777;
+    padding: 20px 5px;
+}
+
+@media (max-width: 500px) {
+
+    .clothes-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cloth-option img {
+        height: 130px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+KAPDA <span>VERSE</span>
+</div>
+
+
+<div class="card">
+
+<div class="tryon-header">
+
+<h1>🪞 Pehno Dekho</h1>
+
+<p class="subtitle">
+See how your Almirah outfit could look on you.
+</p>
+
+</div>
+
+
+<!-- STEP 1 -->
+
+<h2 class="section-title">
+1️⃣ Upload Your Photo
+</h2>
+
+<div class="upload-box">
+
+<div class="upload-icon">
+📸
+</div>
+
+<h3>
+Choose Your Photo
+</h3>
+
+<p style="color:#777;margin-top:6px;">
+Use a clear full-body photo for better try-on results.
+</p>
+
+<input
+type="file"
+id="userPhoto"
+accept="image/*"
+>
+
+</div>
+
+
+<!-- USER PHOTO PREVIEW -->
+
+<div
+id="photoPreview"
+class="preview-section">
+
+<h3>
+Your Photo
+</h3>
+
+<img
+id="userPhotoImage"
+alt="Your photo"
+>
+
+</div>
+
+
+<!-- STEP 2 -->
+
+<h2 class="section-title">
+2️⃣ Choose an Outfit
+</h2>
+
+<p style="color:#777;">
+Select clothes from your own Almirah.
+</p>
+
+
+<div
+id="clothesList"
+class="clothes-list">
+
+</div>
+
+
+<!-- SELECTED CLOTH -->
+
+<div
+id="selectedBox"
+class="selected-box">
+
+<h3>
+✅ Selected Outfit
+</h3>
+
+<img
+id="selectedImage"
+alt="Selected outfit"
+>
+
+<p
+id="selectedName"
+class="cloth-name">
+</p>
+
+<p
+id="selectedLastWorn"
+class="last-worn">
+</p>
+
+</div>
+
+
+<!-- TRY ON BUTTON -->
+
+<button
+class="tryon-button"
+onclick="startTryOn()">
+
+🪞 Pehno Dekho
+
+</button>
+
+
+<!-- RESULT -->
+
+<div
+id="resultBox"
+class="result-box">
+
+<h2>
+✨ Your Try-On Result
+</h2>
+
+<div class="result-placeholder">
+
+<div class="result-icon">
+🤖
+</div>
+
+<h3>
+AI Try-On Ready
+</h3>
+
+<p style="color:#777;margin-top:8px;line-height:1.5;">
+
+Your photo and selected outfit are ready
+for the AI virtual try-on.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="note">
+
+💡 <b>How it works:</b><br><br>
+
+📸 Upload your photo →
+👕 Select your Almirah outfit →
+🪞 Tap Pehno Dekho →
+🤖 AI creates your virtual try-on.
+
+<br><br>
+
+The AI image-generation connection will be added
+in the next step.
+
+</div>
+
+
+<button onclick="goBack()">
+← Back to Dashboard
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// =====================================
+// LOAD PROFILE
+// =====================================
+
+const savedProfile =
+localStorage.getItem("kapdaVerseProfile");
+
+
+if (!savedProfile) {
+
+window.location.href =
+"../index.html";
+
+}
+
+
+const profile =
+JSON.parse(savedProfile);
+
+
+// =====================================
+// USER PHOTO
+// =====================================
+
+let userPhoto = null;
+
+
+document
+.getElementById("userPhoto")
+.addEventListener(
+"change",
+function() {
+
+const file =
+this.files[0];
+
+if (!file) {
+return;
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(event) {
+
+userPhoto =
+event.target.result;
+
+
+document
+.getElementById("userPhotoImage")
+.src =
+userPhoto;
+
+
+document
+.getElementById("photoPreview")
+.style.display =
+"block";
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+// =====================================
+// GET CATEGORIES
+// =====================================
+
+function getCategories() {
+
+
+if (profile.gender === "female") {
+
+return [
+"tops",
+"jeans",
+"kurtis",
+"sarees",
+"lehengas",
+"dresses"
+];
+
+}
+
+
+if (profile.gender === "male") {
+
+return [
+"tshirts",
+"shirts",
+"jeans",
+"trousers",
+"kurtas",
+"jackets"
+];
+
+}
+
+
+return [
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+];
+
+}
+
+
+// =====================================
+// CLOTHES
+// =====================================
+
+let selectedCloth = null;
+
+
+function loadClothes() {
+
+const categories =
+getCategories();
+
+
+const clothesList =
+document.getElementById(
+"clothesList"
+);
+
+
+let total = 0;
+
+
+categories.forEach(
+function(category) {
+
+
+const key =
+"kapdaVerse_" +
+category;
+
+
+const clothes =
+JSON.parse(
+localStorage.getItem(key)
+) || [];
+
+
+clothes.forEach(
+function(item) {
+
+total++;
+
+
+const card =
+document.createElement(
+"div"
+);
+
+
+card.className =
+"cloth-option";
+
+
+card.innerHTML = `
+
+<img
+src="${item.image}"
+alt="${formatCategory(category)}"
+>
+
+<div class="cloth-name">
+${formatCategory(category)}
+</div>
+
+<div class="last-worn">
+Last Worn: ${item.lastWorn}
+</div>
+
+`;
+
+
+card.onclick =
+function() {
+
+document
+.querySelectorAll(
+".cloth-option"
+)
+.forEach(
+function(element) {
+
+element.classList.remove(
+"selected"
+);
+
+});
+
+
+card.classList.add(
+"selected"
+);
+
+
+selectedCloth = item;
+
+
+showSelectedCloth(
+item,
+category
+);
+
+};
+
+
+clothesList.appendChild(
+card
+);
+
+});
+
+});
+
+
+if (total === 0) {
+
+clothesList.innerHTML = `
+
+<div
+class="empty-message"
+style="grid-column:1/-1;">
+
+<h3>
+👕 No Clothes Found
+</h3>
+
+<p>
+Your Almirah doesn't have any uploaded clothes yet.
+</p>
+
+<button
+onclick="goToAlmirah()">
+
++ Add Clothes
+
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+// =====================================
+// SELECTED CLOTH PREVIEW
+// =====================================
+
+function showSelectedCloth(
+item,
+category
+) {
+
+
+const box =
+document.getElementById(
+"selectedBox"
+);
+
+
+document.getElementById(
+"selectedImage"
+).src =
+item.image;
+
+
+document.getElementById(
+"selectedName"
+).innerText =
+formatCategory(category);
+
+
+document.getElementById(
+"selectedLastWorn"
+).innerText =
+"Last Worn: " +
+item.lastWorn;
+
+
+box.style.display =
+"block";
+
+}
+
+
+// =====================================
+// START TRY ON
+// =====================================
+
+function startTryOn() {
+
+
+if (!userPhoto) {
+
+alert(
+"📸 Please upload your photo first."
+);
+
+return;
+
+}
+
+
+if (!selectedCloth) {
+
+alert(
+"👕 Please select an outfit from your Almirah."
+);
+
+return;
+
+}
+
+
+const resultBox =
+document.getElementById(
+"resultBox"
+);
+
+
+resultBox.style.display =
+"block";
+
+
+resultBox.scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+// =====================================
+// CATEGORY NAME
+// =====================================
+
+function formatCategory(
+category
+) {
+
+
+const names = {
+
+tshirts: "T-Shirt",
+
+shirts: "Shirt",
+
+jeans: "Jeans",
+
+trousers: "Trousers",
+
+kurtas: "Kurta",
+
+jackets: "Jacket",
+
+tops: "Top",
+
+kurtis: "Kurti",
+
+sarees: "Saree",
+
+lehengas: "Lehenga",
+
+dresses: "Dress",
+
+casual: "Casual Wear"
+
+};
+
+
+return names[category] ||
+category;
+
+}
+
+
+// =====================================
+// NAVIGATION
+// =====================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+
+function goToAlmirah() {
+
+window.location.href =
+"almirah.html";
+
+}
+
+
+// =====================================
+// START
+// =====================================
+
+loadClothes();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Final Testing</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.test-card {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.test-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.test-name {
+    font-weight: bold;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ready {
+    background: #e8f5e9;
+    color: #238636;
+}
+
+.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.test-button {
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.progress-box {
+    margin-top: 20px;
+    background: #eee;
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #222;
+    transition: width 0.4s;
+}
+
+.center {
+    text-align: center;
+}
+
+.big-number {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>🧪 Final Website Test</h1>
+
+
+<p class="subtitle">
+
+Check karo ki KAPDA VERSE ke important
+features properly connected hain.
+
+</p>
+
+
+<!-- SCORE -->
+
+<div class="center">
+
+<div
+id="score"
+class="big-number">
+
+0%
+
+</div>
+
+<p id="scoreText">
+
+Testing...
+
+</p>
+
+</div>
+
+
+<div class="progress-box">
+
+<div
+id="progressBar"
+class="progress-bar">
+
+</div>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+👤 Profile System
+
+</div>
+
+<div
+id="profileStatus"
+class="status">
+
+Checking
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('../index.html')">
+
+Open Profile
+
+</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+📊 Dashboard
+
+</div>
+
+<div
+id="dashboardStatus"
+class="status">
+
+Checking
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('dashboard.html')">
+
+Open Dashboard
+
+</button>
+
+</div>
+
+
+<!-- ALMIRAH -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+👕 My Almirah
+
+</div>
+
+<div
+id="almirahStatus"
+class="status">
+
+Checking
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('almirah.html')">
+
+Open Almirah
+
+</button>
+
+</div>
+
+
+<!-- STYLIST -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+✨ Fashion Stylist
+
+</div>
+
+<div
+id="chatStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('chat.html')">
+
+Open Stylist
+
+</button>
+
+</div>
+
+
+<!-- PERSONAL STYLING -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+🎨 Personal Styling
+
+</div>
+
+<div
+id="stylingStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('styling.html')">
+
+Open Styling
+
+</button>
+
+</div>
+
+
+<!-- OUTFIT PICKER -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+🧠 Pick My Outfit
+
+</div>
+
+<div
+id="outfitStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('outfit-picker.html')">
+
+Open Outfit Picker
+
+</button>
+
+</div>
+
+
+<!-- BUDGET -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+💰 Budget Check
+
+</div>
+
+<div
+id="budgetStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('budget.html')">
+
+Open Budget
+
+</button>
+
+</div>
+
+
+<!-- SHOPPING -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+🛒 Smart Shopping
+
+</div>
+
+<div
+id="shoppingStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('shopping.html')">
+
+Open Shopping
+
+</button>
+
+</div>
+
+
+<!-- SHARE -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+📱 WhatsApp Share
+
+</div>
+
+<div
+id="shareStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('share.html')">
+
+Open Share
+
+</button>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+🔎 Smart Search
+
+</div>
+
+<div
+id="searchStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<button
+class="test-button"
+onclick="openPage('almirah.html')">
+
+Test Search
+
+</button>
+
+</div>
+
+
+<!-- WEATHER -->
+
+<div class="test-card">
+
+<div class="test-row">
+
+<div class="test-name">
+
+🌦️ Weather API
+
+</div>
+
+<div
+id="weatherStatus"
+class="status">
+
+Ready
+
+</div>
+
+</div>
+
+
+<p style="margin-top:10px;color:#777;font-size:13px;">
+
+Weather requires location permission.
+
+</p>
+
+</div>
+
+
+<!-- FINAL -->
+
+<div
+id="finalMessage"
+class="empty-box"
+style="margin-top:20px;">
+
+Running final checks...
+
+</div>
+
+
+<button
+onclick="goBack()">
+
+← Back to Dashboard
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ==========================================
+// CHECK PROFILE
+// ==========================================
+
+const profile =
+localStorage.getItem(
+"kapdaVerseProfile"
+);
+
+
+if (profile) {
+
+setStatus(
+"profileStatus",
+"READY",
+"ready"
+);
+
+}
+else {
+
+setStatus(
+"profileStatus",
+"PROFILE REQUIRED",
+"warning"
+);
+
+}
+
+
+// ==========================================
+// CHECK DASHBOARD
+// ==========================================
+
+checkPage(
+"dashboard.html",
+"dashboardStatus"
+);
+
+
+// ==========================================
+// CHECK ALMIRAH
+// ==========================================
+
+checkPage(
+"almirah.html",
+"almirahStatus"
+);
+
+
+// ==========================================
+// STATIC FEATURES
+// ==========================================
+
+setStatus(
+"chatStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"stylingStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"outfitStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"budgetStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"shoppingStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"shareStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"searchStatus",
+"READY",
+"ready"
+);
+
+setStatus(
+"weatherStatus",
+"READY",
+"ready"
+);
+
+
+// ==========================================
+// FUNCTIONS
+// ==========================================
+
+function setStatus(
+id,
+text,
+className
+) {
+
+const element =
+document.getElementById(id);
+
+element.innerText =
+text;
+
+element.className =
+"status " +
+className;
+
+}
+
+
+function checkPage(
+page,
+elementId
+) {
+
+fetch(page)
+
+.then(
+function(response) {
+
+if (response.ok) {
+
+setStatus(
+elementId,
+"READY",
+"ready"
+);
+
+}
+
+else {
+
+setStatus(
+elementId,
+"CHECK",
+"warning"
+);
+
+}
+
+})
+
+.catch(
+function() {
+
+setStatus(
+elementId,
+"CHECK",
+"warning"
+);
+
+});
+
+}
+
+
+function openPage(
+page
+) {
+
+window.location.href =
+page;
+
+}
+
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+
+// ==========================================
+// SCORE
+// ==========================================
+
+function calculateScore() {
+
+
+const checks = [
+
+document.getElementById(
+"profileStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"dashboardStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"almirahStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"chatStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"stylingStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"outfitStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"budgetStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"shoppingStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"shareStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"searchStatus"
+).classList.contains("ready"),
+
+document.getElementById(
+"weatherStatus"
+).classList.contains("ready")
+
+];
+
+
+const passed =
+checks.filter(
+Boolean
+).length;
+
+
+const percentage =
+Math.round(
+(passed / checks.length) * 100
+);
+
+
+document.getElementById(
+"score"
+).innerText =
+percentage + "%";
+
+
+document.getElementById(
+"progressBar"
+).style.width =
+percentage + "%";
+
+
+if (percentage === 100) {
+
+document.getElementById(
+"scoreText"
+).innerText =
+"🎉 Everything looks ready!";
+
+document.getElementById(
+"finalMessage"
+).innerHTML = `
+
+<h3>🚀 KAPDA VERSE is ready for final polish!</h3>
+
+<p>
+
+All major feature connections are ready.
+
+</p>
+
+`;
+
+}
+
+else {
+
+document.getElementById(
+"scoreText"
+).innerText =
+"Some checks need attention.";
+
+document.getElementById(
+"finalMessage"
+).innerHTML = `
+
+<h3>⚠️ Almost there!</h3>
+
+<p>
+
+Kuch checks complete nahi hue.
+Upar wale sections ko test karo.
+
+</p>
+
+`;
+
+}
+
+}
+
+
+// Give page checks time to finish
+
+setTimeout(
+calculateScore,
+800
+);
+
+
+</script>
+
+
+</body>
+
+</html>
