@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Kapda Verse - Your personal fashion and wardrobe assistant.">
+
+    <title>KAPDA VERSE | Personal Fashion Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f1eb;
+            color: #222;
+        }
+
+        .landing {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 18px 50px;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 25px;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .brand span {
+            font-weight: normal;
+        }
+
+        .nav-button {
+            width: auto;
+            margin: 0;
+            padding: 10px 17px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: white;
+            border-radius: 25px;
+            padding: 55px 35px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.07);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #f3f3f3;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 span {
+            font-weight: normal;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin: 15px 0;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #666;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            width: auto;
+            text-decoration: none;
+            margin-top: 25px;
+            padding: 15px 28px;
+        }
+
+        /* FEATURES */
+
+        .section-title {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .feature {
+            background: white;
+            padding: 22px;
+            border-radius: 17px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+        }
+
+        .feature h3 {
+            margin: 12px 0 7px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .step {
+            background: white;
+            padding: 22px;
+            border-radius: 17px;
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* CTA */
+
+        .final-cta {
+            margin-top: 45px;
+            background: #222;
+            color: white;
+            padding: 35px 25px;
+            border-radius: 22px;
+            text-align: center;
+        }
+
+        .final-cta p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .final-button {
+            display: inline-block;
+            width: auto;
+            background: white;
+            color: #222;
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .hero {
+                padding: 40px 22px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero h2 {
+                font-size: 21px;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding-bottom: 18px;
+            }
+
+            .brand {
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="landing">
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="brand">
+            KAPDA <span>VERSE</span>
+        </div>
+
+        <a
+            href="#create"
+            class="nav-button"
+            style="text-decoration:none;background:#222;color:white;display:inline-block;"
+        >
+            Get Started
+        </a>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-badge">
+            ✨ Your Personal Fashion Assistant
+        </div>
+
+        <h1>
+            KAPDA <span>VERSE</span>
+        </h1>
+
+        <h2>
+            Your Clothes. Your Style. Your Choice.
+        </h2>
+
+        <p>
+
+            Manage your wardrobe, discover better outfit
+            combinations, get personalized styling ideas,
+            track your clothes and shop smarter — all in one place.
+
+        </p>
+
+
+        <a
+            href="#create"
+            class="hero-button"
+            style="background:#222;color:white;"
+        >
+            Create My Style Profile →
+        </a>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <h2 class="section-title">
+        ✨ Everything Your Wardrobe Needs
+    </h2>
+
+    <p class="section-subtitle">
+        Simple tools to make everyday fashion easier.
+    </p>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">👕</div>
+
+            <h3>My Almirah</h3>
+
+            <p>
+                Upload your own clothes and keep your
+                digital wardrobe organized.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🌦️</div>
+
+            <h3>Weather Styling</h3>
+
+            <p>
+                Get outfit ideas according to the
+                current weather.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🚫</div>
+
+            <h3>No-Repeat Alert</h3>
+
+            <p>
+                Know what you recently wore so you
+                can avoid unnecessary outfit repeats.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">✨</div>
+
+            <h3>Fashion Stylist</h3>
+
+            <p>
+                Get personalized outfit and styling
+                suggestions based on your profile.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🧠</div>
+
+            <h3>Pick My Outfit</h3>
+
+            <p>
+                Compare multiple outfit options and
+                get a smart recommendation.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🛒</div>
+
+            <h3>Smart Shopping</h3>
+
+            <p>
+                Find wardrobe gaps and know what type
+                of clothing you may actually need.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- HOW IT WORKS -->
+
+    <h2 class="section-title">
+        🚀 How KAPDA VERSE Works
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Create Your Profile
+            </h3>
+
+            <p>
+                Tell us about your personal style.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Build Your Almirah
+            </h3>
+
+            <p>
+                Add the clothes you already own.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Style Smarter
+            </h3>
+
+            <p>
+                Discover outfits and shop more wisely.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- CREATE PROFILE -->
+
+    <section
+        id="create"
+        class="final-cta"
+    >
+
+        <h2>
+            Ready to build your personal wardrobe? 👕
+        </h2>
+
+        <p>
+            Create your free KAPDA VERSE profile and
+            start organizing your style.
+        </p>
+
+        <a
+            href="#profile"
+            class="final-button"
+        >
+            Start Now →
+        </a>
+
+    </section>
+
+
+    <!-- PROFILE FORM -->
+
+    <div
+        id="profile"
+        class="card"
+        style="margin-top:25px;"
+    >
+
+        <h1>
+            Create Your Profile
+        </h1>
+
+        <p class="subtitle">
+            Tell us about yourself to get personalized
+            fashion suggestions.
+        </p>
+
+
+        <form id="profileForm">
+
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="number"
+                placeholder="Enter mobile number"
+                required
+            >
+
+
+            <label>
+                Age
+            </label>
+
+            <input
+                type="number"
+                id="age"
+                placeholder="Enter your age"
+                required
+            >
+
+
+            <label>
+                Gender
+            </label>
+
+            <select id="gender" required>
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="male">
+                    Male
+                </option>
+
+                <option value="female">
+                    Female
+                </option>
+
+                <option value="other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label>
+                Skin Tone
+            </label>
+
+            <select id="skinTone" required>
+
+                <option value="">
+                    Select Skin Tone
+                </option>
+
+                <option>Fair</option>
+                <option>Light</option>
+                <option>Medium</option>
+                <option>Wheatish</option>
+                <option>Dusky</option>
+                <option>Deep</option>
+
+            </select>
+
+
+            <label>
+                Body Shape
+            </label>
+
+            <select id="bodyShape" required>
+
+                <option value="">
+                    Select Body Shape
+                </option>
+
+                <option>Rectangle</option>
+                <option>Triangle</option>
+                <option>Inverted Triangle</option>
+                <option>Hourglass</option>
+                <option>Oval</option>
+
+            </select>
+
+
+            <label>
+                Face Shape
+            </label>
+
+            <select id="faceShape" required>
+
+                <option value="">
+                    Select Face Shape
+                </option>
+
+                <option>Oval</option>
+                <option>Round</option>
+                <option>Square</option>
+                <option>Heart</option>
+                <option>Diamond</option>
+                <option>Long</option>
+
+            </select>
+
+
+            <label>
+                Hair Style
+            </label>
+
+            <select id="hairStyle" required>
+
+                <option value="">
+                    Select Hair Style
+                </option>
+
+                <option>Short</option>
+                <option>Medium</option>
+                <option>Long</option>
+                <option>Curly</option>
+                <option>Wavy</option>
+                <option>Straight</option>
+
+            </select>
+
+
+            <label>
+                Upload Face + Body Photo
+            </label>
+
+            <input
+                type="file"
+                id="photo"
+                accept="image/*"
+                required
+            >
+
+
+            <button type="submit">
+
+                Create My Kapda Verse →
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <div class="footer">
+
+        © 2026 KAPDA VERSE · Your Personal Fashion Assistant
+
+    </div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
