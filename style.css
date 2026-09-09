@@ -182,6 +182,7 @@ button:hover {
 }
 
 .install-banner {
+    position: relative;
     position: sticky;
     top: 0;
     z-index: 20;
@@ -199,6 +200,7 @@ button:hover {
     display: grid;
     gap: 3px;
     flex: 1;
+    padding-right: 24px;
 }
 
 .install-banner span {
@@ -219,6 +221,9 @@ button:hover {
 }
 
 .install-banner .install-close {
+    position: absolute;
+    top: 7px;
+    right: 8px;
     padding: 4px 9px;
     background: transparent;
     color: white;
@@ -233,9 +238,11 @@ button:hover {
     .install-banner {
         align-items: flex-start;
         flex-wrap: wrap;
+        padding-right: 42px;
     }
 
     .install-banner > div {
         min-width: calc(100% - 35px);
+        padding-right: 0;
     }
 }
