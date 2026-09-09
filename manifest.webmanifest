@@ -1,0 +1,19 @@
+{
+  "name": "Kapda Verse Fashion Bestie",
+  "short_name": "Kapda Verse",
+  "description": "Tumhara personal fashion aur wardrobe bestie.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1eb",
+  "theme_color": "#222222",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
