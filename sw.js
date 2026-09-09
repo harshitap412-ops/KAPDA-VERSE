@@ -1,4 +1,4 @@
-const CACHE_NAME = "kapda-verse-v2";
+const CACHE_NAME = "kapda-verse-v3";
 const APP_FILES = [
     "./",
     "./index.html",
