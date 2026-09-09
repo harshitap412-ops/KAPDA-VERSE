@@ -9,11 +9,13 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Kapda Verse - Your personal fashion and wardrobe assistant.">
+          content="Kapda Verse - Tumhara personal fashion aur wardrobe bestie.">
 
-    <title>KAPDA VERSE | Personal Fashion Assistant</title>
+    <title>KAPDA VERSE | Fashion Bestie</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#222222">
 
     <style>
 
@@ -245,6 +247,15 @@
 
 <body>
 
+<div id="installBanner" class="install-banner" hidden>
+    <div>
+        <strong>📲 Kapda Verse App Install Karo</strong>
+        <span>Phone ya laptop par app jaisa smooth experience pao.</span>
+    </div>
+    <button id="installButton" type="button">Install Karo</button>
+    <button id="installClose" class="install-close" type="button" aria-label="Close install banner">×</button>
+</div>
+
 
 <div class="landing">
 
@@ -262,7 +273,7 @@
             class="nav-button"
             style="text-decoration:none;background:#222;color:white;display:inline-block;"
         >
-            Get Started
+            Start Karo
         </a>
 
     </div>
@@ -273,7 +284,7 @@
     <section class="hero">
 
         <div class="hero-badge">
-            ✨ Your Personal Fashion Assistant
+            ✨ Tumhara Personal Fashion Bestie
         </div>
 
         <h1>
@@ -281,14 +292,14 @@
         </h1>
 
         <h2>
-            Your Clothes. Your Style. Your Choice.
+            Tumhare Clothes. Tumhari Vibe. Tumhari Choice.
         </h2>
 
         <p>
 
-            Manage your wardrobe, discover better outfit
-            combinations, get personalized styling ideas,
-            track your clothes and shop smarter — all in one place.
+            Apni wardrobe manage karo, better outfit combos discover karo,
+            personalized styling ideas pao, clothes track karo aur smart shopping karo.
+            Sab kuch ek hi place par, no stress.
 
         </p>
 
@@ -298,7 +309,7 @@
             class="hero-button"
             style="background:#222;color:white;"
         >
-            Create My Style Profile →
+            Apna Style Profile Banao →
         </a>
 
     </section>
@@ -307,11 +318,11 @@
     <!-- FEATURES -->
 
     <h2 class="section-title">
-        ✨ Everything Your Wardrobe Needs
+        ✨ Wardrobe Ko Jo Chahiye, Sab Yahan
     </h2>
 
     <p class="section-subtitle">
-        Simple tools to make everyday fashion easier.
+        Everyday fashion ko easy banane wale simple tools.
     </p>
 
 
@@ -325,8 +336,7 @@
             <h3>My Almirah</h3>
 
             <p>
-                Upload your own clothes and keep your
-                digital wardrobe organized.
+                Apne clothes upload karo aur digital wardrobe ko sorted rakho.
             </p>
 
         </div>
@@ -336,11 +346,10 @@
 
             <div class="feature-icon">🌦️</div>
 
-            <h3>Weather Styling</h3>
+            <h3>Weather Wali Styling</h3>
 
             <p>
-                Get outfit ideas according to the
-                current weather.
+                Aaj ke weather ke hisaab se outfit ideas pao.
             </p>
 
         </div>
@@ -350,11 +359,10 @@
 
             <div class="feature-icon">🚫</div>
 
-            <h3>No-Repeat Alert</h3>
+            <h3>Repeat Mat Karo Alert</h3>
 
             <p>
-                Know what you recently wore so you
-                can avoid unnecessary outfit repeats.
+                Recently kya pehna tha dekho, unnecessary repeat se bacho.
             </p>
 
         </div>
@@ -367,8 +375,7 @@
             <h3>Fashion Stylist</h3>
 
             <p>
-                Get personalized outfit and styling
-                suggestions based on your profile.
+                Tumhare profile ke according personalized looks pao.
             </p>
 
         </div>
@@ -378,11 +385,10 @@
 
             <div class="feature-icon">🧠</div>
 
-            <h3>Pick My Outfit</h3>
+            <h3>Mera Outfit Pick Karo</h3>
 
             <p>
-                Compare multiple outfit options and
-                get a smart recommendation.
+                Multiple looks compare karo aur best pick pao.
             </p>
 
         </div>
@@ -392,11 +398,10 @@
 
             <div class="feature-icon">🛒</div>
 
-            <h3>Smart Shopping</h3>
+            <h3>Smart Shopping Scene</h3>
 
             <p>
-                Find wardrobe gaps and know what type
-                of clothing you may actually need.
+                Wardrobe me kya missing hai samjho aur wahi shop karo jo actually chahiye.
             </p>
 
         </div>
@@ -408,7 +413,7 @@
     <!-- HOW IT WORKS -->
 
     <h2 class="section-title">
-        🚀 How KAPDA VERSE Works
+        🚀 KAPDA VERSE Kaise Kaam Karta Hai
     </h2>
 
 
@@ -422,11 +427,11 @@
             </div>
 
             <h3>
-                Create Your Profile
+                Apna Profile Banao
             </h3>
 
             <p>
-                Tell us about your personal style.
+                Apni style vibe ke baare me batao.
             </p>
 
         </div>
@@ -439,11 +444,11 @@
             </div>
 
             <h3>
-                Build Your Almirah
+                Apni Almirah Banao
             </h3>
 
             <p>
-                Add the clothes you already own.
+                Jo clothes already hain, unhe add karo.
             </p>
 
         </div>
@@ -456,11 +461,11 @@
             </div>
 
             <h3>
-                Style Smarter
+                Aur Smart Style Karo
             </h3>
 
             <p>
-                Discover outfits and shop more wisely.
+                Better outfits discover karo aur wisely shop karo.
             </p>
 
         </div>
@@ -477,19 +482,19 @@
     >
 
         <h2>
-            Ready to build your personal wardrobe? 👕
+            Apni personal wardrobe build karne ke liye ready? 👕
         </h2>
 
         <p>
-            Create your free KAPDA VERSE profile and
-            start organizing your style.
+            Apni free KAPDA VERSE profile banao aur
+            apni style ko organize karo.
         </p>
 
         <a
             href="#profile"
             class="final-button"
         >
-            Start Now →
+            Abhi Start Karo →
         </a>
 
     </section>
@@ -504,12 +509,11 @@
     >
 
         <h1>
-            Create Your Profile
+            Apni Profile Banao
         </h1>
 
         <p class="subtitle">
-            Tell us about yourself to get personalized
-            fashion suggestions.
+            Apne baare me batao aur personalized fashion suggestions pao.
         </p>
 
 
@@ -523,7 +527,7 @@
             <input
                 type="text"
                 id="name"
-                placeholder="Enter your name"
+                placeholder="Apna naam enter karo"
                 required
             >
 
@@ -535,8 +539,33 @@
             <input
                 type="tel"
                 id="number"
-                placeholder="Enter mobile number"
+                placeholder="Apna mobile number enter karo"
                 required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Apni email enter karo"
+                autocomplete="email"
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Strong password banao"
+                minlength="8"
+                autocomplete="new-password"
             >
 
 
@@ -547,7 +576,7 @@
             <input
                 type="number"
                 id="age"
-                placeholder="Enter your age"
+                placeholder="Apni age enter karo"
                 required
             >
 
@@ -559,7 +588,7 @@
             <select id="gender" required>
 
                 <option value="">
-                    Select Gender
+                    Gender select karo
                 </option>
 
                 <option value="male">
@@ -584,7 +613,7 @@
             <select id="skinTone" required>
 
                 <option value="">
-                    Select Skin Tone
+                    Skin tone select karo
                 </option>
 
                 <option>Fair</option>
@@ -604,7 +633,11 @@
             <select id="bodyShape" required>
 
                 <option value="">
-                    Select Body Shape
+                    Body shape select karo
+                </option>
+
+                <option value="dont-know">
+                    Don't know
                 </option>
 
                 <option>Rectangle</option>
@@ -623,7 +656,11 @@
             <select id="faceShape" required>
 
                 <option value="">
-                    Select Face Shape
+                    Face shape select karo
+                </option>
+
+                <option value="dont-know">
+                    Don't know
                 </option>
 
                 <option>Oval</option>
@@ -636,6 +673,85 @@
             </select>
 
 
+            <div id="faceAnalysis" class="shape-analysis" hidden>
+
+                <label for="facePhoto">
+                    Upload a clear face photo
+                </label>
+
+                <input
+                    type="file"
+                    id="facePhoto"
+                    accept="image/*"
+                    capture="user"
+                >
+
+                <button type="button" class="camera-button" data-camera-type="face">
+                    📸 Use Laptop Camera
+                </button>
+
+                <video id="faceCamera" class="camera-preview" autoplay playsinline hidden></video>
+
+                <button type="button" class="capture-button" data-capture-type="face" hidden>
+                    ✅ Click Face Photo
+                </button>
+
+                <p class="analysis-status" id="faceAnalysisStatus">
+                    Camera se live face photo click karo ya gallery se choose karo.
+                </p>
+
+            </div>
+
+
+            <div id="bodyAnalysis" class="shape-analysis" hidden>
+
+                <label for="bodyPhoto">
+                    Upload a full-body photo
+                </label>
+
+                <input
+                    type="file"
+                    id="bodyPhoto"
+                    accept="image/*"
+                    capture="environment"
+                >
+
+                <button type="button" class="camera-button" data-camera-type="body">
+                    📸 Use Laptop Camera
+                </button>
+
+                <video id="bodyCamera" class="camera-preview" autoplay playsinline hidden></video>
+
+                <button type="button" class="capture-button" data-capture-type="body" hidden>
+                    ✅ Click Full-Body Photo
+                </button>
+
+                <p class="analysis-status" id="bodyAnalysisStatus">
+                    Camera se live full-body photo click karo ya gallery se choose karo.
+                </p>
+
+            </div>
+
+
+            <div id="shapeResults" class="shape-results" hidden>
+
+                <h3>✨ Your Shape Analysis</h3>
+
+                <p id="faceShapeResult">
+                    Face shape will appear here.
+                </p>
+
+                <p id="bodyShapeResult">
+                    Body shape will appear here.
+                </p>
+
+                <small>
+                    This is an estimate. You can update the dropdown if it does not look right.
+                </small>
+
+            </div>
+
+
             <label>
                 Hair Style
             </label>
@@ -643,7 +759,7 @@
             <select id="hairStyle" required>
 
                 <option value="">
-                    Select Hair Style
+                    Hair style select karo
                 </option>
 
                 <option>Short</option>
@@ -656,21 +772,9 @@
             </select>
 
 
-            <label>
-                Upload Face + Body Photo
-            </label>
-
-            <input
-                type="file"
-                id="photo"
-                accept="image/*"
-                required
-            >
-
-
             <button type="submit">
 
-                Create My Kapda Verse →
+                Apna Kapda Verse Banao →
 
             </button>
 
@@ -682,7 +786,7 @@
 
     <div class="footer">
 
-        © 2026 KAPDA VERSE · Your Personal Fashion Assistant
+        © 2026 KAPDA VERSE · Tumhara Personal Fashion Bestie
 
     </div>
 
@@ -690,7 +794,13 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-client.js"></script>
 <script src="script.js"></script>
+<script src="install.js"></script>
 
 
 </body>
