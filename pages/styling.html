@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Personal Styling</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.profile-summary {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.style-section {
+    margin-top: 22px;
+}
+
+.style-box {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.style-box h3 {
+    margin-bottom: 10px;
+}
+
+.style-box ul {
+    padding-left: 20px;
+}
+
+.style-box li {
+    margin-bottom: 8px;
+}
+
+.colour-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.colour {
+    padding: 12px;
+    border-radius: 10px;
+    background: white;
+    text-align: center;
+    border: 1px solid #eee;
+    font-weight: bold;
+}
+
+.tip {
+    background: #fff8e1;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>✨ Personal Styling</h1>
+
+
+<p class="subtitle">
+
+Tumhari profile ke basis par personalized fashion guide.
+
+</p>
+
+
+<div
+
+id="profileSummary"
+
+class="profile-summary">
+
+Profile load ho rahi hai...
+
+</div>
+
+
+<!-- CLOTHING -->
+
+
+<div class="style-section">
+
+<h2>👕 Clothing Style</h2>
+
+
+<div
+
+id="clothingStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<!-- COLOURS -->
+
+
+<div class="style-section">
+
+<h2>🎨 Recommended Colours</h2>
+
+
+<div
+
+id="colourStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<!-- BODY SHAPE -->
+
+
+<div class="style-section">
+
+<h2>👤 Body Shape Styling</h2>
+
+
+<div
+
+id="bodyStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<!-- FACE -->
+
+
+<div class="style-section">
+
+<h2>🕶️ Face & Accessories</h2>
+
+
+<div
+
+id="faceStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<!-- HAIR -->
+
+
+<div class="style-section">
+
+<h2>💇 Hair Styling</h2>
+
+
+<div
+
+id="hairStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<!-- FOOTWEAR -->
+
+
+<div class="style-section">
+
+<h2>👟 Footwear</h2>
+
+
+<div
+
+id="footwearStyle"
+
+class="style-box">
+
+</div>
+
+</div>
+
+
+<div class="tip">
+
+<strong>💡 Kapda Verse Tip</strong>
+
+<br><br>
+
+Personal styling ka goal kisi strict rule ko follow karna nahi hai.
+
+Jo outfit tumhe comfortable aur confident feel karaye,
+wohi sabse important hai. ✨
+
+</div>
+
+
+<button onclick="goBack()">
+
+← Dashboard Par Chalo
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// LOAD PROFILE
+// ======================================
+
+let profile = null;
+
+try {
+
+const savedProfile = localStorage.getItem("kapdaVerseProfile");
+
+if (savedProfile) {
+
+profile = JSON.parse(savedProfile);
+
+}
+
+} catch (error) {
+
+localStorage.removeItem("kapdaVerseProfile");
+console.warn("Invalid kapdaVerseProfile data removed.", error);
+
+}
+
+
+if (!profile) {
+
+alert(
+"Pehle apni profile bana lo bestie."
+);
+
+window.location.href =
+"../index.html";
+
+}
+
+
+// ======================================
+// PROFILE SUMMARY
+// ======================================
+
+document.getElementById(
+"profileSummary"
+).innerHTML = `
+
+<strong>👤 Your Profile</strong>
+
+<br>
+
+Gender: ${profile.gender}
+
+<br>
+
+Skin Tone: ${profile.skinTone}
+
+<br>
+
+Body Shape: ${profile.bodyShape}
+
+<br>
+
+Face Shape: ${profile.faceShape}
+
+<br>
+
+Hair Style: ${profile.hairStyle}
+
+`;
+
+
+// ======================================
+// GENDER
+// ======================================
+
+const gender =
+profile.gender;
+
+
+// ======================================
+// CLOTHING STYLE
+// ======================================
+
+let clothing = "";
+
+
+if (gender === "male") {
+
+clothing = `
+
+<h3>🔥 Your Recommended Style</h3>
+
+<ul>
+
+<li>Well-fitted T-shirts and shirts</li>
+
+<li>Straight or relaxed-fit jeans</li>
+
+<li>For formal looks, try clean shirts with trousers</li>
+
+<li>Layering with jackets can add structure</li>
+
+<li>Avoid clothes that are extremely oversized if you want a sharper look</li>
+
+</ul>
+
+`;
+
+}
+
+else if (gender === "female") {
+
+clothing = `
+
+<h3>🔥 Your Recommended Style</h3>
+
+<ul>
+
+<li>Choose silhouettes that feel comfortable and balanced</li>
+
+<li>Try tops, kurtis, dresses or sarees according to occasion</li>
+
+<li>Use layering to create different looks</li>
+
+<li>High-waist bottoms can create a structured appearance</li>
+
+<li>Experiment with fitted + relaxed pieces together</li>
+
+</ul>
+
+`;
+
+}
+
+else {
+
+clothing = `
+
+<h3>🔥 Your Recommended Style</h3>
+
+<ul>
+
+<li>Clean casual outfits</li>
+
+<li>T-shirts with jeans or relaxed trousers</li>
+
+<li>Layering with jackets</li>
+
+<li>Neutral colours for easy combinations</li>
+
+<li>Choose comfort and personal expression first</li>
+
+</ul>
+
+`;
+
+}
+
+
+document.getElementById(
+"clothingStyle"
+).innerHTML =
+clothing;
+
+
+// ======================================
+// COLOURS
+// ======================================
+
+let colours = [];
+
+
+if (
+profile.skinTone === "Fair" ||
+profile.skinTone === "Light"
+) {
+
+colours = [
+
+"Navy Blue",
+
+"Black",
+
+"Olive",
+
+"Burgundy",
+
+"Forest Green",
+
+"White"
+
+];
+
+}
+
+else if (
+profile.skinTone === "Medium" ||
+profile.skinTone === "Wheatish"
+) {
+
+colours = [
+
+"Navy Blue",
+
+"Maroon",
+
+"Olive Green",
+
+"Mustard",
+
+"White",
+
+"Teal"
+
+];
+
+}
+
+else {
+
+colours = [
+
+"White",
+
+"Black",
+
+"Royal Blue",
+
+"Emerald Green",
+
+"Burgundy",
+
+"Mustard"
+
+];
+
+}
+
+
+let colourHTML = `
+
+<h3>✨ Colours worth trying</h3>
+
+<div class="colour-grid">
+
+`;
+
+
+colours.forEach(
+function(colour) {
+
+colourHTML += `
+
+<div class="colour">
+
+${colour}
+
+</div>
+
+`;
+
+});
+
+
+colourHTML += `
+
+</div>
+
+`;
+
+
+document.getElementById(
+"colourStyle"
+).innerHTML =
+colourHTML;
+
+
+// ======================================
+// BODY SHAPE
+// ======================================
+
+let bodyHTML = "";
+
+
+if (
+profile.bodyShape ===
+"Rectangle"
+) {
+
+bodyHTML = `
+
+<h3>Rectangle Shape</h3>
+
+<ul>
+
+<li>Layering can add visual structure</li>
+
+<li>Try jackets and overshirts</li>
+
+<li>Choose well-fitted clothes</li>
+
+<li>Horizontal details can add width</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.bodyShape ===
+"Triangle"
+) {
+
+bodyHTML = `
+
+<h3>Triangle Shape</h3>
+
+<ul>
+
+<li>Structured shoulders can create balance</li>
+
+<li>Darker bottoms can work well</li>
+
+<li>Try jackets with defined shoulders</li>
+
+<li>Avoid extremely tight tops if you want more balance</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.bodyShape ===
+"Inverted Triangle"
+) {
+
+bodyHTML = `
+
+<h3>Inverted Triangle Shape</h3>
+
+<ul>
+
+<li>Relaxed-fit bottoms can balance proportions</li>
+
+<li>Simple, clean tops work well</li>
+
+<li>Avoid excessive shoulder padding</li>
+
+<li>Try straight or relaxed trousers</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.bodyShape ===
+"Hourglass"
+) {
+
+bodyHTML = `
+
+<h3>Hourglass Shape</h3>
+
+<ul>
+
+<li>Well-fitted clothes can highlight natural proportions</li>
+
+<li>Wrap styles can work nicely</li>
+
+<li>High-waist bottoms are worth trying</li>
+
+<li>Avoid hiding your natural shape under excessive fabric</li>
+
+</ul>
+
+`;
+
+}
+
+else {
+
+bodyHTML = `
+
+<h3>Oval Shape</h3>
+
+<ul>
+
+<li>Vertical lines can create a longer appearance</li>
+
+<li>Structured but comfortable fits work well</li>
+
+<li>Dark solid colours are easy to style</li>
+
+<li>Avoid clothes that are excessively tight</li>
+
+</ul>
+
+`;
+
+}
+
+
+document.getElementById(
+"bodyStyle"
+).innerHTML =
+bodyHTML;
+
+
+// ======================================
+// FACE SHAPE
+// ======================================
+
+let faceHTML = "";
+
+
+if (
+profile.faceShape ===
+"Round"
+) {
+
+faceHTML = `
+
+<ul>
+
+<li>Try slightly angular sunglasses</li>
+
+<li>Rectangular frames can add contrast</li>
+
+<li>Caps with some height can work well</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.faceShape ===
+"Square"
+) {
+
+faceHTML = `
+
+<ul>
+
+<li>Round or oval sunglasses can soften angles</li>
+
+<li>Medium-sized frames are worth trying</li>
+
+<li>Avoid frames that are extremely boxy</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.faceShape ===
+"Heart"
+) {
+
+faceHTML = `
+
+<ul>
+
+<li>Medium-width frames can work well</li>
+
+<li>Avoid extremely wide frames</li>
+
+<li>Try balanced, softer shapes</li>
+
+</ul>
+
+`;
+
+}
+
+else {
+
+faceHTML = `
+
+<ul>
+
+<li>Try frames that contrast your face shape</li>
+
+<li>Medium-sized sunglasses are a safe choice</li>
+
+<li>Experiment with different frame shapes</li>
+
+</ul>
+
+`;
+
+}
+
+
+document.getElementById(
+"faceStyle"
+).innerHTML =
+faceHTML;
+
+
+// ======================================
+// HAIR
+// ======================================
+
+let hairHTML = "";
+
+
+if (
+profile.hairStyle ===
+"Curly"
+) {
+
+hairHTML = `
+
+<ul>
+
+<li>Keep natural curls defined and hydrated</li>
+
+<li>Short textured styles can look sharp</li>
+
+<li>For longer curls, controlled layering can work well</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.hairStyle ===
+"Wavy"
+) {
+
+hairHTML = `
+
+<ul>
+
+<li>Natural texture can be your strongest styling feature</li>
+
+<li>Messy textured looks can work well</li>
+
+<li>Avoid over-styling the waves</li>
+
+</ul>
+
+`;
+
+}
+
+else if (
+profile.hairStyle ===
+"Long"
+) {
+
+hairHTML = `
+
+<ul>
+
+<li>Layered styles can add movement</li>
+
+<li>Keep the overall shape intentional</li>
+
+<li>Try different partings</li>
+
+</ul>
+
+`;
+
+}
+
+else {
+
+hairHTML = `
+
+<ul>
+
+<li>Keep the haircut clean and well-shaped</li>
+
+<li>Try a side or textured styling depending on preference</li>
+
+<li>Choose a hairstyle that feels easy to maintain</li>
+
+</ul>
+
+`;
+
+}
+
+
+document.getElementById(
+"hairStyle"
+).innerHTML =
+hairHTML;
+
+
+// ======================================
+// FOOTWEAR
+// ======================================
+
+let footwearHTML = "";
+
+
+if (gender === "male") {
+
+footwearHTML = `
+
+<ul>
+
+<li>👟 White sneakers — everyday casual</li>
+
+<li>🥾 Boots — jackets and rugged looks</li>
+
+<li>👞 Loafers — smart/formal outfits</li>
+
+<li>👟 Minimal sneakers — college looks</li>
+
+</ul>
+
+`;
+
+}
+
+else if (gender === "female") {
+
+footwearHTML = `
+
+<ul>
+
+<li>👟 Sneakers — casual and college</li>
+
+<li>👡 Flats — comfortable everyday looks</li>
+
+<li>👢 Boots — jackets and winter outfits</li>
+
+<li>👠 Heels — formal and special occasions</li>
+
+</ul>
+
+`;
+
+}
+
+else {
+
+footwearHTML = `
+
+<ul>
+
+<li>👟 Sneakers — everyday outfits</li>
+
+<li>🥾 Boots — jackets and winter looks</li>
+
+<li>👞 Minimal shoes — smart casual outfits</li>
+
+</ul>
+
+`;
+
+}
+
+
+document.getElementById(
+"footwearStyle"
+).innerHTML =
+footwearHTML;
+
+
+// ======================================
+// BACK
+// ======================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

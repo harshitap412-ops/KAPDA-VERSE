@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Dashboard</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.welcome-box {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.welcome-name {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.profile-info {
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 15px;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+.weather-box {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.weather-temp {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.weather-message {
+    color: #666;
+    line-height: 1.5;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.stat-label {
+    color: #777;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.feature-grid button {
+    margin-top: 0;
+    min-height: 70px;
+}
+
+.outfit-box {
+    margin-top: 20px;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.outfit-item {
+    background: white;
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.empty-outfit {
+    color: #777;
+    line-height: 1.6;
+}
+
+.category-box {
+    margin-top: 20px;
+    padding: 18px;
+    background: #f7f7f7;
+    border-radius: 15px;
+}
+
+.loading {
+    color: #777;
+}
+
+@media (max-width: 500px) {
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-name {
+        font-size: 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<!-- WELCOME -->
+
+<div class="welcome-box">
+
+<div class="welcome-name" id="welcomeName">
+
+Welcome bestie 👋
+
+</div>
+
+<p class="subtitle">
+
+Tumhara personal fashion dashboard ✨
+
+</p>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div
+
+class="profile-info"
+
+id="profileInfo">
+
+Profile load ho raha hai...
+
+</div>
+
+
+<!-- WEATHER -->
+
+<div class="weather-box">
+
+<h2>🌦️ Aaj Ka Weather</h2>
+
+<div
+
+id="weatherStatus"
+
+class="loading">
+
+Tumhari location check ho rahi hai...
+
+</div>
+
+</div>
+
+
+<!-- WARDROBE STATS -->
+
+<h2 style="margin-top:25px;">
+
+📊 My Wardrobe Stats
+
+</h2>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<div
+
+class="stat-number"
+
+id="totalClothes">
+
+0
+
+</div>
+
+<div class="stat-label">
+
+Total Clothes
+
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div
+
+class="stat-number"
+
+id="freshClothes">
+
+0
+
+</div>
+
+<div class="stat-label">
+
+Fresh Choices ✨
+
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div
+
+class="stat-number"
+
+id="recentClothes">
+
+0
+
+</div>
+
+<div class="stat-label">
+
+Recently Worn
+
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div
+
+class="stat-number"
+
+id="categoryCount">
+
+0
+
+</div>
+
+<div class="stat-label">
+
+Used Categories
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- SMART OUTFIT -->
+
+<div class="outfit-box">
+
+<h2>👕 Aaj Ka Smart Outfit</h2>
+
+<div
+
+id="outfitSuggestion"
+
+class="empty-outfit">
+
+Wardrobe check ho rahi hai...
+
+</div>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<h2 style="margin-top:30px;">
+
+✨ Kapda Verse Ke Features
+
+</h2>
+
+
+<div class="feature-grid">
+
+
+<button
+
+onclick="window.location.href='almirah.html'">
+
+👕<br>
+
+Meri Almirah
+
+</button>
+
+
+<button
+
+onclick="openUploadPage()">
+
+➕<br>
+
+Clothes Add Karo
+
+</button>
+
+
+<button
+
+onclick="window.location.href='chat.html'">
+
+🤖<br>
+
+Fashion Bestie
+
+</button>
+
+
+<button
+
+onclick="window.location.href='styling.html'">
+
+✨<br>
+
+Personal Styling Vibe
+
+</button>
+
+
+<button
+
+onclick="window.location.href='outfit-picker.html'">
+
+🛍️<br>
+
+Mera Outfit Pick Karo
+
+</button>
+
+
+<button
+
+onclick="window.location.href='budget.html'">
+
+💰<br>
+
+Budget Check Karo
+
+</button>
+
+
+<button
+
+onclick="window.location.href='share.html'">
+
+📱<br>
+
+Dost Ko Dikhao
+
+</button>
+
+
+</div>
+
+
+<!-- PROFILE NOTE -->
+
+<div class="category-box">
+
+<h3>💡 Tumhari Style Profile</h3>
+
+<p style="margin-top:8px;color:#666;line-height:1.6;">
+
+Kapda Verse tumhare profile, wardrobe aur weather
+ko use karke better outfit suggestions dene ki koshish karta hai.
+
+</p>
+
+</div>
+
+
+<!-- LOGOUT / PROFILE -->
+
+<button
+
+onclick="goHome()"
+
+style="margin-top:25px;">
+
+↩️ Profile Edit Karo
+
+</button>
+
+
+<button
+
+type="button"
+
+onclick="downloadBackup()"
+
+style="margin-top:12px;">
+
+⬇️ Data Backup Download Karo
+
+</button>
+
+
+<label
+
+for="backupFile"
+
+style="margin-top:12px;text-align:center;cursor:pointer;">
+
+↥ Backup Restore Karo
+
+</label>
+
+<input
+
+type="file"
+
+id="backupFile"
+
+accept="application/json"
+
+style="display:none;"
+
+onchange="restoreBackup(event)">
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// LOAD PROFILE
+// ======================================
+
+let profile = null;
+
+try {
+
+const savedProfile = localStorage.getItem("kapdaVerseProfile");
+
+if (savedProfile) {
+
+profile = JSON.parse(savedProfile);
+
+}
+
+} catch (error) {
+
+localStorage.removeItem("kapdaVerseProfile");
+console.warn("Invalid kapdaVerseProfile data removed.", error);
+
+}
+
+
+if (!profile) {
+
+window.location.replace(
+new URL(
+"../index.html",
+document.baseURI
+).href
+);
+
+profile = {
+name: "",
+gender: "other",
+skinTone: "",
+bodyShape: "",
+faceShape: "",
+hairStyle: ""
+};
+
+}
+
+
+// ======================================
+// PROFILE DISPLAY
+// ======================================
+
+document.getElementById(
+"welcomeName"
+).innerText =
+"Hey " +
+profile.name +
+" 👋";
+
+
+document.getElementById(
+"profileInfo"
+).innerHTML = `
+
+<strong>👤 Your Style Profile</strong>
+
+<br>
+
+Gender: ${profile.gender}
+
+<br>
+
+Skin Tone: ${profile.skinTone}
+
+<br>
+
+Body Shape: ${profile.bodyShape}
+
+<br>
+
+Face Shape: ${profile.faceShape}
+
+<br>
+
+Hair Style: ${profile.hairStyle}
+
+`;
+
+
+// ======================================
+// CATEGORY SETUP
+// ======================================
+
+let categories = [];
+
+
+if (profile.gender === "male") {
+
+categories = [
+
+"tshirts",
+"shirts",
+"jeans",
+"trousers",
+"kurtas",
+"jackets"
+
+];
+
+}
+
+else if (profile.gender === "female") {
+
+categories = [
+
+"tops",
+"jeans",
+"kurtis",
+"sarees",
+"lehengas",
+"dresses"
+
+];
+
+}
+
+else {
+
+categories = [
+
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+
+];
+
+}
+
+
+// ======================================
+// GET ALL CLOTHES
+// ======================================
+
+function getAllClothes() {
+
+let all = [];
+
+
+categories.forEach(
+function(category) {
+
+const items =
+JSON.parse(
+localStorage.getItem(
+"kapdaVerse_" +
+category
+) || "[]"
+);
+
+
+items.forEach(
+function(item) {
+
+all.push({
+
+...item,
+
+category:
+category
+
+});
+
+});
+
+});
+
+
+return all;
+
+}
+
+
+// ======================================
+// WARDROBE STATS
+// ======================================
+
+function updateStats() {
+
+const clothes =
+getAllClothes();
+
+
+document.getElementById(
+"totalClothes"
+).innerText =
+clothes.length;
+
+
+// Fresh
+
+const fresh =
+clothes.filter(
+function(item) {
+
+return (
+
+item.lastWorn ===
+"Not worn yet" ||
+
+item.lastWorn ===
+"1 week ago" ||
+
+item.lastWorn ===
+"More than 1 week ago"
+
+);
+
+});
+
+
+document.getElementById(
+"freshClothes"
+).innerText =
+fresh.length;
+
+
+// Recently worn
+
+const recent =
+clothes.filter(
+function(item) {
+
+return (
+
+item.lastWorn ===
+"Today" ||
+
+item.lastWorn ===
+"Yesterday" ||
+
+item.lastWorn ===
+"2 days ago" ||
+
+item.lastWorn ===
+"3 days ago"
+
+);
+
+});
+
+
+document.getElementById(
+"recentClothes"
+).innerText =
+recent.length;
+
+
+// Categories
+
+const usedCategories =
+new Set(
+clothes.map(
+function(item) {
+
+return item.category;
+
+})
+);
+
+
+document.getElementById(
+"categoryCount"
+).innerText =
+usedCategories.size;
+
+}
+
+
+// ======================================
+// CATEGORY DISPLAY NAME
+// ======================================
+
+function categoryName(category) {
+
+const names = {
+
+tshirts:
+"T-Shirt",
+
+shirts:
+"Shirt",
+
+jeans:
+"Jeans",
+
+trousers:
+"Trousers",
+
+kurtas:
+"Kurta",
+
+tops:
+"Top",
+
+kurtis:
+"Kurti",
+
+sarees:
+"Saree",
+
+lehengas:
+"Lehenga",
+
+dresses:
+"Dress",
+
+casual:
+"Casual Wear"
+
+};
+
+
+return names[category] ||
+category;
+
+}
+
+
+// ======================================
+// WEATHER
+// ======================================
+
+function getWeatherSuggestion(
+temperature,
+rain
+) {
+
+if (rain) {
+
+return {
+
+title:
+"🌧️ Rainy Weather",
+
+text:
+"Rain ke chances hain — comfortable aur easy-to-manage outfit choose karo."
+
+};
+
+}
+
+
+if (temperature >= 32) {
+
+return {
+
+title:
+"☀️ Hot Weather",
+
+text:
+"Light aur breathable clothes best rahenge."
+
+};
+
+}
+
+
+if (temperature >= 25) {
+
+return {
+
+title:
+"🌤️ Warm Weather",
+
+text:
+"Light casual outfit comfortable rahega."
+
+};
+
+}
+
+
+return {
+
+title:
+"❄️ Cool Weather",
+
+text:
+"Layering ya slightly warm outfit try kar sakte ho."
+
+};
+
+}
+
+
+// ======================================
+// WEATHER API
+// ======================================
+
+function loadWeather() {
+
+
+if (!navigator.geolocation) {
+
+document.getElementById(
+"weatherStatus"
+).innerHTML =
+
+"Weather location available nahi hai.";
+
+return;
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position) {
+
+
+const latitude =
+position.coords.latitude;
+
+
+const longitude =
+position.coords.longitude;
+
+
+const url =
+
+"https://api.open-meteo.com/v1/forecast" +
+
+"?latitude=" +
+latitude +
+
+"&longitude=" +
+longitude +
+
+"&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code,wind_speed_10m" +
+
+"&timezone=auto";
+
+
+fetch(url)
+
+.then(
+function(response) {
+
+return response.json();
+
+})
+
+.then(
+function(data) {
+
+
+const current =
+data.current;
+
+
+const temperature =
+current.temperature_2m;
+
+
+const rain =
+current.rain > 0 ||
+current.precipitation > 0;
+
+
+const suggestion =
+getWeatherSuggestion(
+temperature,
+rain
+);
+
+
+document.getElementById(
+"weatherStatus"
+).innerHTML = `
+
+<div class="weather-temp">
+
+${temperature}°C
+
+</div>
+
+<strong>
+
+${suggestion.title}
+
+</strong>
+
+<p class="weather-message">
+
+${suggestion.text}
+
+</p>
+
+<p style="margin-top:8px;color:#777;">
+
+Humidity: ${current.relative_humidity_2m}%
+
+<br>
+
+Wind: ${current.wind_speed_10m} km/h
+
+</p>
+
+`;
+
+
+// Outfit after weather
+
+generateOutfit(
+temperature,
+rain
+);
+
+})
+
+.catch(
+function() {
+
+document.getElementById(
+"weatherStatus"
+).innerHTML =
+
+"Weather data load nahi ho paya. 🌤️";
+
+
+generateOutfit(
+null,
+false
+);
+
+});
+
+},
+
+function() {
+
+document.getElementById(
+"weatherStatus"
+).innerHTML =
+
+"Location permission nahi mili. Weather suggestion unavailable.";
+
+generateOutfit(
+null,
+false
+);
+
+}
+
+);
+
+}
+
+
+// ======================================
+// SMART OUTFIT
+// ======================================
+
+function generateOutfit(
+temperature,
+rain
+) {
+
+
+const clothes =
+getAllClothes();
+
+
+const box =
+document.getElementById(
+"outfitSuggestion"
+);
+
+
+if (!clothes.length) {
+
+box.innerHTML = `
+
+<p>
+
+👕 Abhi tumhari Almirah mein clothes nahi hain.
+
+</p>
+
+<p style="margin-top:8px;">
+
+My Almirah mein jaakar apne clothes upload karo,
+phir Kapda Verse tumhare actual wardrobe se outfit suggest karega.
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+// ======================================
+// CATEGORY PRIORITY
+// ======================================
+
+let preferred = [];
+
+
+if (profile.gender === "male") {
+
+
+if (rain) {
+
+preferred = [
+
+"tshirts",
+"shirts",
+"jeans"
+
+];
+
+}
+
+else if (
+temperature !== null &&
+temperature >= 32
+) {
+
+preferred = [
+
+"tshirts",
+"jeans"
+
+];
+
+}
+
+else if (
+temperature !== null &&
+temperature >= 25
+) {
+
+preferred = [
+
+"tshirts",
+"shirts",
+"jeans",
+"trousers"
+
+];
+
+}
+
+else {
+
+preferred = [
+
+"shirts",
+"trousers",
+"kurtas",
+"jackets"
+
+];
+
+}
+
+}
+
+
+else if (
+profile.gender === "female"
+) {
+
+
+if (rain) {
+
+preferred = [
+
+"tops",
+"jeans",
+"kurtis"
+
+];
+
+}
+
+else if (
+temperature !== null &&
+temperature >= 32
+) {
+
+preferred = [
+
+"tops",
+"dresses",
+"jeans"
+
+];
+
+}
+
+else if (
+temperature !== null &&
+temperature >= 25
+) {
+
+preferred = [
+
+"tops",
+"kurtis",
+"jeans",
+"dresses"
+
+];
+
+}
+
+else {
+
+preferred = [
+
+"kurtis",
+"jeans",
+"dresses",
+"sarees"
+
+];
+
+}
+
+}
+
+
+else {
+
+preferred = categories;
+
+}
+
+
+// ======================================
+// FILTER RECENTLY WORN
+// ======================================
+
+let choices =
+clothes.filter(
+function(item) {
+
+return preferred.includes(
+item.category
+);
+
+});
+
+
+let freshChoices =
+choices.filter(
+function(item) {
+
+return (
+
+item.lastWorn !==
+"Today" &&
+
+item.lastWorn !==
+"Yesterday" &&
+
+item.lastWorn !==
+"2 days ago"
+
+);
+
+});
+
+
+if (freshChoices.length) {
+
+choices =
+freshChoices;
+
+}
+
+
+if (!choices.length) {
+
+choices =
+clothes;
+
+}
+
+
+// ======================================
+// PICK CLOTHES
+// ======================================
+
+const selected =
+choices.slice(
+0,
+Math.min(3, choices.length)
+);
+
+
+let html = "";
+
+
+selected.forEach(
+function(item) {
+
+html += `
+
+<div class="outfit-item">
+
+<strong>
+
+👕 ${categoryName(item.category)}
+
+</strong>
+
+<br>
+
+<span style="color:#777;font-size:14px;">
+
+Last worn: ${item.lastWorn}
+
+</span>
+
+</div>
+
+`;
+
+});
+
+
+html += `
+
+<p style="margin-top:15px;line-height:1.6;">
+
+✨ Ye suggestion tumhare uploaded wardrobe se hai.
+
+</p>
+
+`;
+
+
+box.innerHTML =
+html;
+
+}
+
+
+// ======================================
+// INITIALIZE
+// ======================================
+
+updateStats();
+
+loadWeather();
+
+
+// ======================================
+// EDIT PROFILE
+// ======================================
+
+function goHome() {
+
+const confirmEdit =
+confirm(
+"Profile page par jaana hai?"
+);
+
+
+if (confirmEdit) {
+
+window.location.href =
+"../index.html?edit=1";
+
+}
+
+}
+
+function openUploadPage() {
+const uploadPage = profile.gender === "female"
+? "clothes/womens.html"
+: "clothes/mens.html";
+
+window.location.href = uploadPage;
+}
+
+function getBackupData() {
+    const data = {};
+
+    for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index);
+
+        if (key && key.startsWith("kapdaVerse")) {
+            data[key] = localStorage.getItem(key);
+        }
+    }
+
+    return data;
+}
+
+function downloadBackup() {
+    const file = new Blob(
+        [JSON.stringify(getBackupData(), null, 2)],
+        {type: "application/json"}
+    );
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(file);
+    link.download = "kapda-verse-backup.json";
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
+function restoreBackup(event) {
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        try {
+            const backup = JSON.parse(reader.result);
+
+            Object.keys(backup).forEach(function(key) {
+                if (key.startsWith("kapdaVerse")) {
+                    localStorage.setItem(key, backup[key]);
+                }
+            });
+
+            alert("✅ Backup restore ho gaya. Dashboard reload ho raha hai.");
+            window.location.reload();
+        } catch (error) {
+            alert("Backup file valid nahi hai. Please Kapda Verse ka backup select karo.");
+        }
+    };
+
+    reader.readAsText(file);
+}
+
+</script>
+
+
+</body>
+
+</html>

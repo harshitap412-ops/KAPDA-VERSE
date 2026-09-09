@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Fashion Stylist</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.chat-box {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 15px;
+    min-height: 280px;
+    max-height: 420px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 12px 14px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    max-width: 90%;
+}
+
+.bot {
+    background: white;
+    border: 1px solid #e5e5e5;
+}
+
+.user {
+    background: #222;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.quick-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.quick-buttons button {
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.info-box {
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 14px;
+    margin-top: 20px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.typing {
+    color: #777;
+    font-style: italic;
+}
+
+@media (max-width: 500px) {
+
+    .quick-buttons {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+KAPDA <span>VERSE</span>
+</div>
+
+
+<div class="card">
+
+<h1>🤖 AI Fashion Stylist</h1>
+
+<p class="subtitle">
+Tumhara personal fashion bestie.
+</p>
+
+
+<!-- CHAT -->
+
+<div id="chatBox" class="chat-box">
+
+<div class="message bot">
+
+Heyy 👋 Main tumhara Kapda Verse style bestie hoon.
+
+<br><br>
+
+Main tumhare <strong>profile + actual Almirah + recent wear history</strong>
+dekh ke genuinely useful looks suggest karta hoon. No random fashion gyaan, promise 😌
+
+<br><br>
+
+Bas pucho:
+<br>
+• Aaj kya pehnu?
+<br>
+• Ek casual look do
+<br>
+• Garmi me kya pehnu?
+<br>
+• Kuch fresh suggest karo, repeat nahi
+
+</div>
+
+</div>
+
+
+<!-- INPUT -->
+
+<input
+type="text"
+id="userInput"
+placeholder="Outfit ka kya scene hai? Pucho..."
+>
+
+
+<button onclick="sendMessage()">
+Send →
+</button>
+
+
+<!-- QUICK BUTTONS -->
+
+<div class="quick-buttons">
+
+<button onclick="quickAsk('outfit')">
+👕 Outfit Idea
+</button>
+
+<button onclick="quickAsk('casual')">
+😎 Casual Look
+</button>
+
+<button onclick="quickAsk('formal')">
+👔 Formal Look
+</button>
+
+<button onclick="quickAsk('colour')">
+🎨 Colour Idea
+</button>
+
+<button onclick="quickAsk('fresh')">
+✨ Fresh Outfit
+</button>
+
+<button onclick="quickAsk('weather')">
+🌦️ Weather Outfit
+</button>
+
+</div>
+
+
+<!-- INFO -->
+
+<div class="info-box">
+
+<strong>💡 Smart Styling</strong>
+
+<br><br>
+
+Kapda Verse tumhari uploaded wardrobe check karke
+recently worn clothes ko avoid karne ki try karta hai. Full no-repeat vibes ✨
+
+</div>
+
+
+<button onclick="goBack()">
+← Dashboard Par Chalo
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// PROFILE
+// ======================================
+
+let profile = null;
+
+try {
+
+const savedProfile = localStorage.getItem("kapdaVerseProfile");
+
+if (savedProfile) {
+
+profile = JSON.parse(savedProfile);
+
+}
+
+} catch (error) {
+
+localStorage.removeItem("kapdaVerseProfile");
+console.warn("Invalid kapdaVerseProfile data removed.", error);
+
+}
+
+
+if (!profile) {
+
+window.location.replace("../index.html");
+profile = {gender: "other"};
+
+}
+
+
+// ======================================
+// CHAT
+// ======================================
+
+const chatBox =
+document.getElementById("chatBox");
+
+
+function addMessage(text, type) {
+
+const message =
+document.createElement("div");
+
+message.className =
+"message " + type;
+
+message.innerText =
+text;
+
+chatBox.appendChild(message);
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+}
+
+
+// ======================================
+// GET CATEGORIES
+// ======================================
+
+let categories = [];
+
+
+if (profile.gender === "male") {
+
+categories = [
+
+"tshirts",
+"shirts",
+"jeans",
+"trousers",
+"kurtas",
+"jackets"
+
+];
+
+}
+
+else if (profile.gender === "female") {
+
+categories = [
+
+"tops",
+"jeans",
+"kurtis",
+"sarees",
+"lehengas",
+"dresses"
+
+];
+
+}
+
+else {
+
+categories = [
+
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+
+];
+
+}
+
+
+// ======================================
+// CATEGORY NAMES
+// ======================================
+
+const categoryNames = {
+
+tshirts: "T-Shirt",
+
+shirts: "Shirt",
+
+jeans: "Jeans",
+
+trousers: "Trousers",
+
+kurtas: "Kurta",
+
+jackets: "Jacket",
+
+tops: "Top",
+
+kurtis: "Kurti",
+
+sarees: "Saree",
+
+lehengas: "Lehenga",
+
+dresses: "Dress",
+
+casual: "Casual Wear"
+
+};
+
+
+// ======================================
+// GET ALMIRAH
+// ======================================
+
+function getWardrobe() {
+
+let wardrobe = [];
+
+
+categories.forEach(function(category) {
+
+const key =
+"kapdaVerse_" + category;
+
+
+const clothes =
+JSON.parse(
+localStorage.getItem(key) || "[]"
+);
+
+
+clothes.forEach(function(item) {
+
+wardrobe.push({
+
+category:
+category,
+
+lastWorn:
+item.lastWorn
+
+});
+
+});
+
+});
+
+
+return wardrobe;
+
+}
+
+
+// ======================================
+// WARDROBE
+// ======================================
+
+function getFreshClothes() {
+
+const wardrobe =
+getWardrobe();
+
+
+return wardrobe.filter(function(item) {
+
+return (
+
+item.lastWorn === "Not worn yet" ||
+
+item.lastWorn === "1 week ago" ||
+
+item.lastWorn === "More than 1 week ago"
+
+);
+
+});
+
+}
+
+
+function getRecentlyWorn() {
+
+const wardrobe =
+getWardrobe();
+
+
+return wardrobe.filter(function(item) {
+
+return (
+
+item.lastWorn === "Today" ||
+
+item.lastWorn === "Yesterday" ||
+
+item.lastWorn === "2 days ago" ||
+
+item.lastWorn === "3 days ago"
+
+);
+
+});
+
+}
+
+
+// ======================================
+// CATEGORY SELECTION
+// ======================================
+
+function pickClothing(list) {
+
+if (!list.length) {
+
+return null;
+
+}
+
+
+return list[
+Math.floor(
+Math.random() * list.length
+)
+];
+
+}
+
+
+// ======================================
+// OUTFIT GENERATOR
+// ======================================
+
+function generateOutfit() {
+
+const fresh =
+getFreshClothes();
+
+
+const wardrobe =
+getWardrobe();
+
+
+const available =
+fresh.length
+? fresh
+: wardrobe;
+
+
+if (!available.length) {
+
+return "👕 Tumhari Almirah abhi empty hai.\n\nPehle kuch clothes upload karo, phir main tumhare actual wardrobe se fire outfits banaunga 😌";
+
+}
+
+
+// --------------------------------------
+// MALE
+// --------------------------------------
+
+if (profile.gender === "male") {
+
+const tops =
+available.filter(function(item) {
+
+return (
+item.category === "tshirts" ||
+item.category === "shirts" ||
+item.category === "kurtas"
+);
+
+});
+
+
+const bottoms =
+available.filter(function(item) {
+
+return (
+item.category === "jeans" ||
+item.category === "trousers"
+);
+
+});
+
+
+const top =
+pickClothing(tops);
+
+
+const bottom =
+pickClothing(bottoms);
+
+
+if (top && bottom) {
+
+return (
+
+"✨ Today's Outfit\n\n" +
+
+"👕 " +
+categoryNames[top.category] +
+
+"\n" +
+
+"👖 " +
+categoryNames[bottom.category] +
+
+"\n\n" +
+
+"👟 Clean sneakers ya casual shoes ke saath look complete karo. Easy, but clocked ✨"
+
+);
+
+}
+
+
+if (top) {
+
+return (
+
+"✨ Try your " +
+categoryNames[top.category] +
+" today.\n\n" +
+
+"Isko apne freshest bottom wear ke saath pair karo. Fit kaafi sorted rahega."
+
+);
+
+}
+
+}
+
+
+// --------------------------------------
+// FEMALE
+// --------------------------------------
+
+if (profile.gender === "female") {
+
+const tops =
+available.filter(function(item) {
+
+return (
+item.category === "tops" ||
+item.category === "kurtis"
+);
+
+});
+
+
+const bottoms =
+available.filter(function(item) {
+
+return item.category === "jeans";
+
+});
+
+
+const dresses =
+available.filter(function(item) {
+
+return (
+item.category === "dresses" ||
+item.category === "sarees" ||
+item.category === "lehengas"
+);
+
+});
+
+
+const top =
+pickClothing(tops);
+
+
+const bottom =
+pickClothing(bottoms);
+
+
+const dress =
+pickClothing(dresses);
+
+
+if (top && bottom) {
+
+return (
+
+"✨ Today's Outfit\n\n" +
+
+"👚 " +
+categoryNames[top.category] +
+
+"\n" +
+
+"👖 " +
+categoryNames[bottom.category] +
+
+"\n\n" +
+
+"👟 Comfortable footwear add karo and you are good to go."
+
+);
+
+}
+
+
+if (dress) {
+
+return (
+
+"✨ Today's Outfit\n\n" +
+
+"👗 " +
+categoryNames[dress.category] +
+
+"\n\n" +
+
+"Accessories simple rakho, clean look instantly clocked."
+
+);
+
+}
+
+}
+
+
+// --------------------------------------
+// UNISEX
+// --------------------------------------
+
+const top =
+pickClothing(available);
+
+
+return (
+
+"✨ Try your " +
+
+categoryNames[top.category] +
+
+" today.\n\n" +
+
+"Freshest jeans ya casual bottom wear ke saath pair karo. Main character energy 😎"
+
+);
+
+}
+
+
+// ======================================
+// CASUAL
+// ======================================
+
+function casualLook() {
+
+const wardrobe =
+getWardrobe();
+
+
+if (!wardrobe.length) {
+
+return generateOutfit();
+
+}
+
+
+if (profile.gender === "female") {
+
+return (
+
+"😎 Casual Look\n\n" +
+
+"👚 Top + Jeans try karo.\n\n" +
+
+"Look relaxed rakho, sneakers add karo. Low effort, high slay 😎"
+
+);
+
+}
+
+
+return (
+
+"😎 Casual Look\n\n" +
+
+"👕 Try a T-Shirt with Jeans.\n\n" +
+
+"Sneakers will complete the everyday look."
+
+);
+
+}
+
+
+// ======================================
+// FORMAL
+// ======================================
+
+function formalLook() {
+
+if (profile.gender === "female") {
+
+return (
+
+"👔 Formal Look\n\n" +
+
+"Try a clean Top or Kurti with Jeans.\n\n" +
+
+"Accessories minimal rakho aur clean footwear choose karo."
+
+);
+
+}
+
+
+return (
+
+"👔 Formal Look\n\n" +
+
+"Try a Shirt with Trousers.\n\n" +
+
+"Keep the colours simple and add clean formal shoes."
+
+);
+
+}
+
+
+// ======================================
+// COLOUR
+// ======================================
+
+function colourIdea() {
+
+return (
+
+"🎨 Colour Ideas\n\n" +
+
+"Versatile colours try karo:\n" +
+
+"• Black\n" +
+
+"• White\n" +
+
+"• Navy Blue\n" +
+
+"• Olive\n" +
+
+"• Burgundy\n\n" +
+
+"✨ Occasion aur apni vibe ke hisaab se colour pick karo."
+
+);
+
+}
+
+
+// ======================================
+// FRESH
+// ======================================
+
+function freshOutfit() {
+
+const fresh =
+getFreshClothes();
+
+
+if (!fresh.length) {
+
+return (
+
+"✨ No completely fresh clothes found.\n\n" +
+
+"Tumhari Almirah me mostly recently worn items hain. " +
+
+"Kuch aur clothes add karo ya week-old piece ko revive karo."
+
+);
+
+}
+
+
+const item =
+pickClothing(fresh);
+
+
+return (
+
+"✨ Fresh Choice\n\n" +
+
+"Try your " +
+
+categoryNames[item.category] +
+
+".\n\n" +
+
+"🕒 Last worn: " +
+
+item.lastWorn +
+
+"\n\n" +
+
+"Ye tumhari Almirah ka fresh option hai, repeat se bach gaye bestie."
+
+);
+
+}
+
+
+// ======================================
+// WEATHER
+// ======================================
+
+function weatherLook() {
+
+return (
+
+"🌦️ Weather Outfit\n\n" +
+
+"☀️ Garmi → light T-Shirt/Top + Jeans\n\n" +
+
+"🌤️ Warm weather → Shirt/Top + comfy bottom\n\n" +
+
+"🧥 Thand → Shirt/Kurta + Jacket ya warm layer\n\n" +
+
+"🌧️ Rainy weather → comfy clothes jo jaldi dry ho jayein."
+
+);
+
+}
+
+
+// ======================================
+// MAIN REPLY
+// ======================================
+
+function generateReply(text) {
+
+const lower =
+text.toLowerCase();
+
+
+if (
+lower.includes("fresh") ||
+lower.includes("new") ||
+lower.includes("repeat")
+) {
+
+return freshOutfit();
+
+}
+
+
+if (
+lower.includes("casual")
+) {
+
+return casualLook();
+
+}
+
+
+if (
+lower.includes("formal") ||
+lower.includes("office")
+) {
+
+return formalLook();
+
+}
+
+
+if (
+lower.includes("colour") ||
+lower.includes("color") ||
+lower.includes("colour")
+) {
+
+return colourIdea();
+
+}
+
+
+if (
+lower.includes("weather") ||
+lower.includes("hot") ||
+lower.includes("rain") ||
+lower.includes("cold")
+) {
+
+return weatherLook();
+
+}
+
+
+if (
+lower.includes("wear") ||
+lower.includes("outfit") ||
+lower.includes("dress") ||
+lower.includes("look")
+) {
+
+return generateOutfit();
+
+}
+
+
+return (
+
+"✨ Main outfits, colours, casual/formal looks, fresh clothes aur weather styling me help kar sakta hoon.\n\n" +
+
+"Try karo:\n" +
+
+"👕 What should I wear?\n" +
+
+"😎 Give me a casual look\n" +
+
+"✨ Suggest a fresh outfit"
+
+);
+
+}
+
+
+// ======================================
+// SEND
+// ======================================
+
+function sendMessage() {
+
+const input =
+document.getElementById("userInput");
+
+
+const text =
+input.value.trim();
+
+
+if (!text) {
+
+return;
+
+}
+
+
+addMessage(
+text,
+"user"
+);
+
+
+input.value = "";
+
+
+const typing =
+document.createElement("div");
+
+
+typing.className =
+"message bot typing";
+
+
+typing.innerText =
+"Styling your outfit... ✨";
+
+
+chatBox.appendChild(
+typing
+);
+
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+
+setTimeout(function() {
+
+typing.remove();
+
+
+const reply =
+generateReply(text);
+
+
+addMessage(
+reply,
+"bot"
+);
+
+}, 500);
+
+}
+
+
+// ======================================
+// QUICK QUESTIONS
+// ======================================
+
+function quickAsk(type) {
+
+if (type === "outfit") {
+
+document.getElementById(
+"userInput"
+).value =
+"What should I wear?";
+
+}
+
+
+if (type === "casual") {
+
+document.getElementById(
+"userInput"
+).value =
+"Give me a casual look";
+
+}
+
+
+if (type === "formal") {
+
+document.getElementById(
+"userInput"
+).value =
+"Give me a formal look";
+
+}
+
+
+if (type === "colour") {
+
+document.getElementById(
+"userInput"
+).value =
+"Which colour should I wear?";
+
+}
+
+
+if (type === "fresh") {
+
+document.getElementById(
+"userInput"
+).value =
+"Suggest a fresh outfit";
+
+}
+
+
+if (type === "weather") {
+
+document.getElementById(
+"userInput"
+).value =
+"What should I wear in this weather?";
+
+}
+
+
+sendMessage();
+
+}
+
+
+// ======================================
+// ENTER KEY
+// ======================================
+
+document.getElementById(
+"userInput"
+).addEventListener(
+"keydown",
+function(event) {
+
+if (event.key === "Enter") {
+
+sendMessage();
+
+}
+
+}
+);
+
+
+// ======================================
+// BACK
+// ======================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

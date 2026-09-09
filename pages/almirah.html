@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | My Almirah</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.search-box {
+    margin-top: 20px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.result-info {
+    margin-top: 20px;
+    padding: 12px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    color: #666;
+}
+
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.clothing-card {
+    background: #f7f7f7;
+    border-radius: 15px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.clothing-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.clothing-info {
+    padding: 8px 2px;
+    line-height: 1.6;
+}
+
+.category-name {
+    font-weight: bold;
+}
+
+.last-worn {
+    color: #777;
+    font-size: 13px;
+}
+
+.repeat-alert {
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.delete-btn {
+    background: white;
+    color: #c62828;
+    border: 1px solid #ddd;
+    margin-top: 8px;
+    padding: 9px;
+    font-size: 13px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px 15px;
+    color: #777;
+    line-height: 1.6;
+}
+
+.clear-filter {
+    background: #555;
+    margin-top: 12px;
+}
+
+.dashboard-back {
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.upload-action {
+    margin-top: 18px;
+    background: #238636;
+}
+
+@media (max-width: 500px) {
+
+    .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .clothing-card img {
+        height: 160px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>👕 My Almirah</h1>
+
+
+<p class="subtitle">
+
+Apne uploaded clothes ko easily search aur filter karo.
+
+</p>
+
+<button
+
+onclick="openUploadPage()"
+
+class="upload-action">
+
+➕ Add Clothes
+
+</button>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<label>
+
+🔍 Clothes Search Karo
+
+</label>
+
+<input
+
+type="text"
+
+id="searchInput"
+
+placeholder="Category se search karo..."
+
+oninput="applyFilters()"
+
+>
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filter-grid">
+
+
+<div>
+
+<label>
+
+👕 Category
+
+</label>
+
+<select
+
+id="categoryFilter"
+
+onchange="applyFilters()">
+
+<option value="all">
+
+All Categories
+
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+
+🕐 Last Kab Pehna
+
+</label>
+
+<select
+
+id="wornFilter"
+
+onchange="applyFilters()">
+
+<option value="all">
+
+All
+
+</option>
+
+<option value="Not worn yet">
+
+Not worn yet
+
+</option>
+
+<option value="Today">
+
+Today
+
+</option>
+
+<option value="Yesterday">
+
+Yesterday
+
+</option>
+
+<option value="2 days ago">
+
+2 days ago
+
+</option>
+
+<option value="3 days ago">
+
+3 days ago
+
+</option>
+
+<option value="4 days ago">
+
+4 days ago
+
+</option>
+
+<option value="5 days ago">
+
+5 days ago
+
+</option>
+
+<option value="6 days ago">
+
+6 days ago
+
+</option>
+
+<option value="1 week ago">
+
+1 week ago
+
+</option>
+
+<option value="More than 1 week ago">
+
+More than 1 week ago
+
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<!-- QUICK FILTER -->
+
+<div style="margin-top:18px;">
+
+<button
+
+onclick="showFresh()">
+
+✨ Fresh Dikhao
+
+</button>
+
+
+<button
+
+onclick="showRecent()">
+
+🔥 Recently Worn
+
+</button>
+
+
+<button
+
+onclick="clearFilters()"
+
+class="clear-filter">
+
+🔄 Filters Hatao
+
+</button>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div
+
+id="resultInfo"
+
+class="result-info">
+
+Wardrobe load ho rahi hai...
+
+</div>
+
+
+<!-- CLOTHES -->
+
+<div
+
+id="clothesGrid"
+
+class="clothes-grid">
+
+</div>
+
+
+<button
+
+onclick="goBack()"
+
+class="dashboard-back">
+
+← Dashboard Par Chalo
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// PROFILE
+// ======================================
+
+let profile = null;
+
+try {
+
+const savedProfile = localStorage.getItem("kapdaVerseProfile");
+
+if (savedProfile) {
+
+profile = JSON.parse(savedProfile);
+
+}
+
+} catch (error) {
+
+localStorage.removeItem("kapdaVerseProfile");
+console.warn("Invalid kapdaVerseProfile data removed.", error);
+
+}
+
+
+if (!profile) {
+
+window.location.href =
+"../index.html";
+
+}
+
+
+// ======================================
+// CATEGORY SETUP
+// ======================================
+
+let categories = [];
+
+
+if (profile.gender === "male") {
+
+categories = [
+
+"tshirts",
+"shirts",
+"jeans",
+"trousers",
+"kurtas",
+"jackets"
+
+];
+
+}
+
+else if (profile.gender === "female") {
+
+categories = [
+
+"tops",
+"jeans",
+"kurtis",
+"sarees",
+"lehengas",
+"dresses"
+
+];
+
+}
+
+else {
+
+categories = [
+
+"tshirts",
+"jeans",
+"jackets",
+"casual"
+
+];
+
+}
+
+
+// ======================================
+// CATEGORY NAMES
+// ======================================
+
+const categoryNames = {
+
+tshirts:
+"T-Shirts",
+
+shirts:
+"Shirts",
+
+jeans:
+"Jeans",
+
+trousers:
+"Trousers",
+
+kurtas:
+"Kurtas",
+
+jackets:
+"Jackets",
+
+tops:
+"Tops",
+
+kurtis:
+"Kurtis",
+
+sarees:
+"Sarees",
+
+lehengas:
+"Lehengas",
+
+dresses:
+"Dresses",
+
+casual:
+"Casual Wear"
+
+};
+
+// Include categories already saved in the wardrobe, even when the profile
+// gender differs from the category page used to upload them.
+const storedCategories = Object.keys(categoryNames).filter(function(category) {
+    return localStorage.getItem("kapdaVerse_" + category) !== null;
+});
+
+categories = [...new Set([...categories, ...storedCategories])];
+
+
+// ======================================
+// GET ALL CLOTHES
+// ======================================
+
+function getAllClothes() {
+
+let clothes = [];
+
+
+categories.forEach(
+
+function(category) {
+
+
+let items = [];
+
+try {
+    items = JSON.parse(
+        localStorage.getItem("kapdaVerse_" + category) || "[]"
+    );
+} catch (error) {
+    console.warn("Invalid wardrobe data skipped for " + category + ".", error);
+}
+
+if (!Array.isArray(items)) {
+    items = [];
+}
+
+
+items.forEach(
+
+function(item) {
+
+
+clothes.push({
+
+...item,
+
+category:
+category
+
+});
+
+
+});
+
+});
+
+
+return clothes;
+
+}
+
+
+// ======================================
+// LOAD CATEGORY FILTER
+// ======================================
+
+function loadCategories() {
+
+
+const select =
+document.getElementById(
+"categoryFilter"
+);
+
+
+categories.forEach(
+
+function(category) {
+
+
+const option =
+document.createElement(
+"option"
+);
+
+
+option.value =
+category;
+
+
+option.innerText =
+categoryNames[category];
+
+
+select.appendChild(
+option
+);
+
+
+});
+
+}
+
+
+// ======================================
+// REPEAT ALERT
+// ======================================
+
+function getAlert(lastWorn) {
+
+
+if (lastWorn === "Today") {
+
+return `
+
+<span style="color:#c62828;">
+
+🚫 Worn today — avoid repeating.
+
+</span>
+
+`;
+
+}
+
+
+if (lastWorn === "Yesterday") {
+
+return `
+
+<span style="color:#e65100;">
+
+⚠️ Worn yesterday.
+
+</span>
+
+`;
+
+}
+
+
+if (
+lastWorn === "2 days ago" ||
+lastWorn === "3 days ago"
+) {
+
+return `
+
+<span style="color:#9a7600;">
+
+💡 Worn recently.
+
+</span>
+
+`;
+
+}
+
+
+return `
+
+<span style="color:#238636;">
+
+✨ Fresh choice!
+
+</span>
+
+`;
+
+}
+
+
+// ======================================
+// DISPLAY CLOTHES
+// ======================================
+
+function displayClothes(
+clothes
+) {
+
+
+const grid =
+document.getElementById(
+"clothesGrid"
+);
+
+
+const info =
+document.getElementById(
+"resultInfo"
+);
+
+
+info.innerText =
+
+clothes.length +
+
+" clothing item" +
+
+(clothes.length === 1
+? ""
+: "s") +
+
+" found";
+
+
+grid.innerHTML = "";
+
+
+if (!clothes.length) {
+
+
+grid.innerHTML = `
+
+<div
+
+class="empty-state"
+
+style="grid-column:1/-1;">
+
+<h2>👕 Nothing Found</h2>
+
+<p>
+
+Is filter/search ke according
+koi clothing item nahi mila.
+
+</p>
+
+<p style="margin-top:8px;">
+
+Different filter try karo ya
+My Almirah mein new clothes add karo.
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+// ======================================
+// CARDS
+// ======================================
+
+clothes.forEach(
+
+function(item) {
+
+
+const card =
+document.createElement(
+"div"
+);
+
+
+card.className =
+"clothing-card";
+
+
+card.innerHTML = `
+
+<img
+
+src="${item.image}"
+
+alt="${categoryNames[item.category]}">
+
+
+<div class="clothing-info">
+
+<div class="category-name">
+
+${categoryNames[item.category]}
+
+</div>
+
+
+<div class="last-worn">
+
+🕐 Last worn: ${item.lastWorn}
+
+</div>
+
+
+<div class="repeat-alert">
+
+${getAlert(item.lastWorn)}
+
+</div>
+
+
+<button
+
+class="delete-btn"
+
+onclick="deleteClothing('${item.category}', '${item.id}')">
+
+🗑️ Remove
+
+</button>
+
+</div>
+
+`;
+
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+// ======================================
+// APPLY FILTERS
+// ======================================
+
+function applyFilters() {
+
+
+const search =
+document.getElementById(
+"searchInput"
+).value
+.toLowerCase()
+.trim();
+
+
+const category =
+document.getElementById(
+"categoryFilter"
+).value;
+
+
+const worn =
+document.getElementById(
+"wornFilter"
+).value;
+
+
+let clothes =
+getAllClothes();
+
+
+if (search) {
+
+clothes =
+clothes.filter(
+
+function(item) {
+
+
+return categoryNames[
+item.category
+]
+.toLowerCase()
+.includes(search);
+
+});
+
+}
+
+
+if (category !== "all") {
+
+clothes =
+clothes.filter(
+
+function(item) {
+
+return item.category ===
+category;
+
+});
+
+}
+
+
+if (worn !== "all") {
+
+clothes =
+clothes.filter(
+
+function(item) {
+
+return item.lastWorn ===
+worn;
+
+});
+
+}
+
+
+displayClothes(
+clothes
+);
+
+}
+
+
+// ======================================
+// FRESH
+// ======================================
+
+function showFresh() {
+
+
+document.getElementById(
+"searchInput"
+).value = "";
+
+
+document.getElementById(
+"categoryFilter"
+).value =
+"all";
+
+
+document.getElementById(
+"wornFilter"
+).value =
+"all";
+
+
+const clothes =
+getAllClothes();
+
+
+const fresh =
+clothes.filter(
+
+function(item) {
+
+
+return (
+
+item.lastWorn ===
+"Not worn yet" ||
+
+item.lastWorn ===
+"1 week ago" ||
+
+item.lastWorn ===
+"More than 1 week ago"
+
+);
+
+});
+
+
+displayClothes(
+fresh
+);
+
+}
+
+
+// ======================================
+// RECENT
+// ======================================
+
+function showRecent() {
+
+
+document.getElementById(
+"searchInput"
+).value = "";
+
+
+document.getElementById(
+"categoryFilter"
+).value =
+"all";
+
+
+document.getElementById(
+"wornFilter"
+).value =
+"all";
+
+
+const clothes =
+getAllClothes();
+
+
+const recent =
+clothes.filter(
+
+function(item) {
+
+
+return (
+
+item.lastWorn ===
+"Today" ||
+
+item.lastWorn ===
+"Yesterday" ||
+
+item.lastWorn ===
+"2 days ago" ||
+
+item.lastWorn ===
+"3 days ago"
+
+);
+
+});
+
+
+displayClothes(
+recent
+);
+
+}
+
+
+// ======================================
+// CLEAR FILTERS
+// ======================================
+
+function clearFilters() {
+
+
+document.getElementById(
+"searchInput"
+).value = "";
+
+
+document.getElementById(
+"categoryFilter"
+).value =
+"all";
+
+
+document.getElementById(
+"wornFilter"
+).value =
+"all";
+
+
+displayClothes(
+getAllClothes()
+);
+
+}
+
+
+// ======================================
+// DELETE CLOTHING
+// ======================================
+
+function deleteClothing(
+category,
+id
+) {
+
+
+const confirmation =
+confirm(
+"Is clothing item ko remove karna hai?"
+);
+
+
+if (!confirmation) {
+
+return;
+
+}
+
+
+let items =
+JSON.parse(
+
+localStorage.getItem(
+
+"kapdaVerse_" +
+category
+
+) || "[]"
+
+);
+
+
+items =
+items.filter(
+
+function(item) {
+
+return String(item.id) !==
+String(id);
+
+});
+
+
+localStorage.setItem(
+
+"kapdaVerse_" +
+category,
+
+JSON.stringify(items)
+
+);
+
+
+applyFilters();
+
+}
+
+
+// ======================================
+// INITIALIZE
+// ======================================
+
+loadCategories();
+
+displayClothes(
+getAllClothes()
+);
+
+
+// ======================================
+// BACK
+// ======================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+function openUploadPage() {
+    const uploadPage = profile.gender === "female"
+        ? "clothes/womens.html"
+        : "clothes/mens.html";
+
+    window.location.href = uploadPage;
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Outfit Picker</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.picker-intro {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.upload-box input {
+    margin-top: 15px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.outfit-card {
+    background: #f7f7f7;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+.outfit-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.outfit-number {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.selected {
+    border: 3px solid #222;
+}
+
+.result-box {
+    display: none;
+    margin-top: 25px;
+    padding: 22px;
+    background: #f7f7f7;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.best-badge {
+    font-size: 42px;
+}
+
+.best-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.reason {
+    color: #666;
+    line-height: 1.6;
+}
+
+.secondary-result {
+    margin-top: 15px;
+    padding: 12px;
+    background: white;
+    border-radius: 12px;
+}
+
+.remove-btn {
+    background: white;
+    color: #c62828;
+    border: 1px solid #ddd;
+    margin-top: 8px;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.reset-btn {
+    background: #555;
+}
+
+@media (max-width: 500px) {
+
+    .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .outfit-card img {
+        height: 150px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>🛍️ Pick My Outfit</h1>
+
+
+<p class="subtitle">
+
+Shopping karte time multiple outfits compare karo
+aur Kapda Verse se best option choose karwao.
+
+</p>
+
+
+<!-- PROFILE -->
+
+<div class="picker-intro">
+
+<p id="profileMessage">
+
+Tumhari profile load ho rahi hai...
+
+</p>
+
+</div>
+
+
+<!-- OCCASION -->
+
+<label>
+
+Kis vibe ke liye shopping kar rahe ho?
+
+</label>
+
+
+<select id="occasion">
+
+<option value="college">
+
+🎓 College
+
+</option>
+
+<option value="casual">
+
+👟 Casual
+
+</option>
+
+<option value="party">
+
+🎉 Party
+
+</option>
+
+<option value="formal">
+
+💼 Formal
+
+</option>
+
+<option value="function">
+
+✨ Function
+
+</option>
+
+<option value="travel">
+
+🧳 Travel
+
+</option>
+
+</select>
+
+
+<!-- UPLOAD -->
+
+<div class="upload-box">
+
+<h2>📸 Outfit Photos Add Karo</h2>
+
+<p>
+
+Multiple outfit photos select karo.
+
+</p>
+
+
+<input
+
+type="file"
+
+id="outfitPhotos"
+
+accept="image/*"
+
+multiple
+
+>
+
+
+<p style="font-size:13px;color:#777;margin-top:10px;">
+
+Maximum 8 photos, bestie
+
+</p>
+
+</div>
+
+
+<!-- PREVIEW -->
+
+<div
+
+id="previewGrid"
+
+class="preview-grid">
+
+</div>
+
+
+<!-- PICK BUTTON -->
+
+<button
+
+onclick="pickBestOutfit()">
+
+🏆 Best Outfit Pick Karo
+
+</button>
+
+
+<!-- RESULT -->
+
+<div
+
+id="resultBox"
+
+class="result-box">
+
+<div class="best-badge">
+
+🏆
+
+</div>
+
+
+<div
+
+class="best-title"
+
+id="bestTitle">
+
+Best Outfit, no cap
+
+</div>
+
+
+<p
+
+class="reason"
+
+id="reason">
+
+</p>
+
+
+<div
+
+class="secondary-result"
+
+id="secondResult">
+
+</div>
+
+
+<div
+
+class="secondary-result"
+
+id="thirdResult">
+
+</div>
+
+</div>
+
+
+<button
+
+onclick="resetPicker()"
+
+class="reset-btn">
+
+🔄 Choose Again
+
+</button>
+
+
+<button
+
+onclick="goBack()">
+
+← Dashboard Par Chalo
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// PROFILE
+// ======================================
+
+let profile = null;
+
+try {
+
+const savedProfile = localStorage.getItem("kapdaVerseProfile");
+
+if (savedProfile) {
+
+profile = JSON.parse(savedProfile);
+
+}
+
+} catch (error) {
+
+localStorage.removeItem("kapdaVerseProfile");
+console.warn("Invalid kapdaVerseProfile data removed.", error);
+
+}
+
+
+const profileMessage =
+document.getElementById(
+"profileMessage"
+);
+
+
+if (!profile) {
+
+profileMessage.innerText =
+"Pehle apni profile bana lo bestie.";
+
+}
+
+else {
+
+profileMessage.innerText =
+"✨ Your profile will be considered while choosing.";
+
+}
+
+
+// ======================================
+// PHOTO STORAGE
+// ======================================
+
+let photos = [];
+
+
+const photoInput =
+document.getElementById(
+"outfitPhotos"
+);
+
+
+photoInput.addEventListener(
+"change",
+function() {
+
+const files =
+Array.from(
+photoInput.files
+);
+
+
+if (files.length > 8) {
+
+alert(
+"Please select maximum 8 photos."
+);
+
+photoInput.value = "";
+
+return;
+
+}
+
+
+photos = [];
+
+
+files.forEach(
+function(file, index) {
+
+if (!file.type.startsWith("image/")) {
+
+return;
+
+}
+
+
+if (file.size > 5 * 1024 * 1024) {
+
+alert(
+"Each image should be below 5 MB."
+);
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(event) {
+
+photos.push({
+
+src:
+event.target.result,
+
+index:
+index + 1
+
+});
+
+
+renderPhotos();
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+});
+
+
+// ======================================
+// SHOW PHOTOS
+// ======================================
+
+function renderPhotos() {
+
+const grid =
+document.getElementById(
+"previewGrid"
+);
+
+
+grid.innerHTML = "";
+
+
+photos.forEach(
+function(photo, index) {
+
+const card =
+document.createElement(
+"div"
+);
+
+
+card.className =
+"outfit-card";
+
+
+card.innerHTML = `
+
+<img
+
+src="${photo.src}"
+
+alt="Outfit ${photo.index}">
+
+
+<div class="outfit-number">
+
+Outfit ${photo.index}
+
+</div>
+
+`;
+
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+// ======================================
+// PICK BEST
+// ======================================
+
+function pickBestOutfit() {
+
+
+if (photos.length < 2) {
+
+alert(
+"Please upload at least 2 outfit photos."
+);
+
+return;
+
+}
+
+
+const occasion =
+document.getElementById(
+"occasion"
+).value;
+
+
+// --------------------------------------
+// SIMPLE SMART SCORING
+// --------------------------------------
+
+let scores = [];
+
+
+photos.forEach(
+function(photo) {
+
+let score =
+Math.random() * 10;
+
+
+// Small profile-based variation
+
+if (profile) {
+
+if (
+profile.skinTone === "Fair" ||
+profile.skinTone === "Light"
+) {
+
+score += Math.random() * 2;
+
+}
+
+else if (
+profile.skinTone === "Dusky" ||
+profile.skinTone === "Deep"
+) {
+
+score += Math.random() * 2;
+
+}
+
+}
+
+
+// Occasion variation
+
+if (occasion === "formal") {
+
+score += Math.random() * 3;
+
+}
+
+if (occasion === "party") {
+
+score += Math.random() * 3;
+
+}
+
+if (occasion === "college") {
+
+score += Math.random() * 2;
+
+}
+
+if (occasion === "casual") {
+
+score += Math.random() * 2;
+
+}
+
+
+scores.push({
+
+photo:
+photo,
+
+score:
+score
+
+});
+
+});
+
+
+// Sort highest first
+
+scores.sort(
+function(a,b) {
+
+return b.score - a.score;
+
+});
+
+
+// --------------------------------------
+// BEST
+// --------------------------------------
+
+const best =
+scores[0];
+
+
+const second =
+scores[1];
+
+
+const third =
+scores[2];
+
+
+const resultBox =
+document.getElementById(
+"resultBox"
+);
+
+
+resultBox.style.display =
+"block";
+
+
+document.getElementById(
+"bestTitle"
+).innerText =
+"Outfit " +
+best.photo.index +
+" is my top pick! 🔥";
+
+
+document.getElementById(
+"reason"
+).innerText =
+getReason(occasion);
+
+
+// --------------------------------------
+// SECOND
+// --------------------------------------
+
+document.getElementById(
+"secondResult"
+).innerHTML =
+
+"🥈 <strong>Second Choice:</strong> " +
+
+"Outfit " +
+
+second.photo.index;
+
+
+// --------------------------------------
+// THIRD
+// --------------------------------------
+
+if (third) {
+
+document.getElementById(
+"thirdResult"
+).innerHTML =
+
+"🥉 <strong>Third Choice:</strong> " +
+
+"Outfit " +
+
+third.photo.index;
+
+}
+
+else {
+
+document.getElementById(
+"thirdResult"
+).style.display =
+"none";
+
+}
+
+
+// Scroll result
+
+resultBox.scrollIntoView({
+
+behavior:
+"smooth"
+
+});
+
+}
+
+
+// ======================================
+// REASON
+// ======================================
+
+function getReason(occasion) {
+
+
+if (occasion === "college") {
+
+return "🎓 College ke liye ye option balanced, comfortable aur easy-to-carry choice lagti hai.";
+
+}
+
+
+if (occasion === "casual") {
+
+return "👟 Casual outing ke liye ye look simple, comfortable aur stylish choice hai.";
+
+}
+
+
+if (occasion === "party") {
+
+return "🎉 Party ke liye ye option comparatively more stylish aur standout choice hai.";
+
+}
+
+
+if (occasion === "formal") {
+
+return "💼 Formal setting ke liye ye option clean, polished aur professional look ke liye suitable hai.";
+
+}
+
+
+if (occasion === "function") {
+
+return "✨ Function ke liye ye option thoda more dressed-up aur occasion-friendly choice hai.";
+
+}
+
+
+if (occasion === "travel") {
+
+return "🧳 Travel ke liye ye option comfortable aur practical choice lagti hai.";
+
+}
+
+
+return "✨ Ye option overall balanced choice lagti hai.";
+
+}
+
+
+// ======================================
+// RESET
+// ======================================
+
+function resetPicker() {
+
+photos = [];
+
+photoInput.value = "";
+
+document.getElementById(
+"previewGrid"
+).innerHTML = "";
+
+document.getElementById(
+"resultBox"
+).style.display =
+"none";
+
+document.getElementById(
+"thirdResult"
+).style.display =
+"block";
+
+}
+
+
+// ======================================
+// BACK
+// ======================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

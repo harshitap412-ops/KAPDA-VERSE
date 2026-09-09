@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapda Verse | Budget Check</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.budget-summary {
+
+    background: #f7f7f7;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+}
+
+
+.summary-number {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin: 8px 0;
+
+}
+
+
+.summary-label {
+
+    color: #777;
+
+}
+
+
+.status-box {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.status-good {
+
+    background: #e8f7e9;
+
+    color: #238636;
+
+}
+
+
+.status-bad {
+
+    background: #ffe5e5;
+
+    color: #c62828;
+
+}
+
+
+.progress-container {
+
+    width: 100%;
+
+    height: 12px;
+
+    background: #e5e5e5;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 15px;
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #222;
+
+    transition: width 0.3s ease;
+
+}
+
+
+.item-list {
+
+    margin-top: 20px;
+
+}
+
+
+.shopping-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f7f7f7;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    margin-top: 8px;
+
+}
+
+
+.item-info {
+
+    flex: 1;
+
+}
+
+
+.item-name {
+
+    font-weight: bold;
+
+}
+
+
+.item-price {
+
+    color: #777;
+
+    font-size: 14px;
+
+    margin-top: 3px;
+
+}
+
+
+.remove-item {
+
+    width: auto;
+
+    margin: 0;
+
+    padding: 8px 12px;
+
+    background: white;
+
+    color: #c62828;
+
+    border: 1px solid #e0b4b4;
+
+    font-size: 13px;
+
+}
+
+
+.empty-list {
+
+    text-align: center;
+
+    color: #777;
+
+    padding: 20px;
+
+}
+
+
+.tip-box {
+
+    background: #f7f7f7;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    margin-top: 20px;
+
+    color: #666;
+
+    line-height: 1.6;
+
+}
+
+
+@media (max-width: 500px) {
+
+    .shopping-item {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+KAPDA <span>VERSE</span>
+
+</div>
+
+
+<div class="card">
+
+
+<h1>💰 Smart Budget Check Karo</h1>
+
+
+<p class="subtitle">
+
+Budget cross kiye bina fashion shopping plan karo.
+
+</p>
+
+
+<!-- BUDGET -->
+
+
+<label>
+
+Tumhara Shopping Budget
+
+</label>
+
+
+<input
+
+type="number"
+
+id="budget"
+
+placeholder="Example: 3000"
+
+min="1"
+
+>
+
+
+<button onclick="setBudget()">
+
+💾 Budget Set Karo
+
+</button>
+
+
+<!-- ADD ITEM -->
+
+
+<div style="margin-top:25px;">
+
+<h2>
+
+🛍️ Shopping Item Add Karo
+
+</h2>
+
+
+<label>
+
+Item Ka Naam
+
+</label>
+
+
+<input
+
+type="text"
+
+id="itemName"
+
+placeholder="Example: Black Shirt"
+
+>
+
+
+<label>
+
+Item Ki Price
+
+</label>
+
+
+<input
+
+type="number"
+
+id="itemPrice"
+
+placeholder="Example: 799"
+
+min="1"
+
+>
+
+
+<button onclick="addItem()">
+
+➕ Item Add Karo
+
+</button>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+
+<div class="budget-summary">
+
+
+<div class="summary-label">
+
+Total Shopping Amount
+
+</div>
+
+
+<div
+
+class="summary-number"
+
+id="totalAmount">
+
+₹0
+
+</div>
+
+
+<div
+
+class="summary-label"
+
+id="budgetText">
+
+Budget abhi set nahi hai
+
+</div>
+
+
+<div class="progress-container">
+
+<div
+
+class="progress-bar"
+
+id="progressBar">
+
+</div>
+
+</div>
+
+
+<div id="statusBox"></div>
+
+
+</div>
+
+
+<!-- SHOPPING LIST -->
+
+
+<div class="item-list">
+
+
+<h2>
+
+🛒 Shopping List
+
+</h2>
+
+
+<div id="shoppingList">
+
+<div class="empty-list">
+
+No shopping items added yet.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- TIPS -->
+
+
+<div class="tip-box">
+
+<strong>💡 Smart Shopping Tip</strong>
+
+<br><br>
+
+Before buying something new, check your
+
+<strong>My Almirah</strong>.
+
+You may already have a similar clothing item.
+
+</div>
+
+
+<button onclick="clearShoppingList()">
+
+🗑️ Clear Shopping List
+
+</button>
+
+
+<button onclick="goBack()">
+
+← Dashboard Par Chalo
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// LOAD DATA
+// ======================================
+
+let budget =
+Number(
+localStorage.getItem(
+"kapdaVerseBudget"
+) || 0
+);
+
+
+let shoppingList =
+JSON.parse(
+localStorage.getItem(
+"kapdaVerseShoppingList"
+) || "[]"
+);
+
+
+// ======================================
+// DISPLAY BUDGET
+// ======================================
+
+function setBudget() {
+
+const input =
+document.getElementById(
+"budget"
+);
+
+
+const value =
+Number(input.value);
+
+
+if (!value || value <= 0) {
+
+alert(
+"Valid budget amount enter karo bestie."
+);
+
+return;
+
+}
+
+
+budget = value;
+
+
+localStorage.setItem(
+"kapdaVerseBudget",
+budget
+);
+
+
+input.value = "";
+
+
+updateDisplay();
+
+alert(
+"✅ Budget save ho gaya!"
+);
+
+}
+
+
+// ======================================
+// ADD ITEM
+// ======================================
+
+function addItem() {
+
+const name =
+document.getElementById(
+"itemName"
+).value.trim();
+
+
+const price =
+Number(
+document.getElementById(
+"itemPrice"
+).value
+);
+
+
+if (!name) {
+
+alert(
+"Item ka naam enter karo."
+);
+
+return;
+
+}
+
+
+if (!price || price <= 0) {
+
+alert(
+"Valid price enter karo."
+);
+
+return;
+
+}
+
+
+shoppingList.push({
+
+id:
+Date.now(),
+
+name:
+name,
+
+price:
+price
+
+});
+
+
+saveList();
+
+
+document.getElementById(
+"itemName"
+).value = "";
+
+
+document.getElementById(
+"itemPrice"
+).value = "";
+
+
+updateDisplay();
+
+}
+
+
+// ======================================
+// SAVE LIST
+// ======================================
+
+function saveList() {
+
+localStorage.setItem(
+
+"kapdaVerseShoppingList",
+
+JSON.stringify(
+shoppingList
+)
+
+);
+
+}
+
+
+// ======================================
+// TOTAL
+// ======================================
+
+function getTotal() {
+
+let total = 0;
+
+
+shoppingList.forEach(
+function(item) {
+
+total += Number(
+item.price
+);
+
+});
+
+
+return total;
+
+}
+
+
+// ======================================
+// REMOVE ITEM
+// ======================================
+
+function removeItem(id) {
+
+shoppingList =
+shoppingList.filter(
+function(item) {
+
+return item.id !== id;
+
+}
+);
+
+
+saveList();
+
+
+updateDisplay();
+
+}
+
+
+// ======================================
+// DISPLAY LIST
+// ======================================
+
+function renderList() {
+
+const list =
+document.getElementById(
+"shoppingList"
+);
+
+
+if (!shoppingList.length) {
+
+list.innerHTML = `
+
+<div class="empty-list">
+
+No shopping items added yet.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+list.innerHTML = "";
+
+
+shoppingList.forEach(
+function(item) {
+
+const div =
+document.createElement(
+"div"
+);
+
+
+div.className =
+"shopping-item";
+
+
+div.innerHTML = `
+
+<div class="item-info">
+
+<div class="item-name">
+
+${item.name}
+
+</div>
+
+<div class="item-price">
+
+₹${item.price}
+
+</div>
+
+</div>
+
+
+<button
+
+class="remove-item"
+
+onclick="removeItem(${item.id})">
+
+Remove
+
+</button>
+
+`;
+
+
+list.appendChild(div);
+
+});
+
+}
+
+
+// ======================================
+// UPDATE DISPLAY
+// ======================================
+
+function updateDisplay() {
+
+const total =
+getTotal();
+
+
+document.getElementById(
+"totalAmount"
+).innerText =
+"₹" + total;
+
+
+const budgetText =
+document.getElementById(
+"budgetText"
+);
+
+
+const statusBox =
+document.getElementById(
+"statusBox"
+);
+
+
+const progress =
+document.getElementById(
+"progressBar"
+);
+
+
+if (!budget) {
+
+budgetText.innerText =
+"Budget not set";
+
+
+progress.style.width =
+"0%";
+
+
+statusBox.innerHTML = "";
+
+renderList();
+
+return;
+
+}
+
+
+budgetText.innerText =
+"Your Budget: ₹" + budget;
+
+
+let percentage =
+(total / budget) * 100;
+
+
+progress.style.width =
+Math.min(
+percentage,
+100
+) + "%";
+
+
+if (total <= budget) {
+
+const remaining =
+budget - total;
+
+
+statusBox.className =
+"status-box status-good";
+
+
+statusBox.innerHTML = `
+
+<strong>🟢 Within Budget!</strong>
+
+<br>
+
+You have
+
+<strong>₹${remaining}</strong>
+
+remaining.
+
+<br>
+
+You have used
+
+<strong>${percentage.toFixed(0)}%</strong>
+
+of your budget.
+
+`;
+
+}
+
+else {
+
+const extra =
+total - budget;
+
+
+statusBox.className =
+"status-box status-bad";
+
+
+statusBox.innerHTML = `
+
+<strong>🔴 Over Budget</strong>
+
+<br>
+
+You are
+
+<strong>₹${extra}</strong>
+
+over your budget.
+
+<br>
+
+Try removing or replacing an item.
+
+`;
+
+}
+
+
+renderList();
+
+}
+
+
+// ======================================
+// CLEAR LIST
+// ======================================
+
+function clearShoppingList() {
+
+if (!shoppingList.length) {
+
+alert(
+"Your shopping list is already empty."
+);
+
+return;
+
+}
+
+
+const confirmClear =
+confirm(
+"Clear your complete shopping list?"
+);
+
+
+if (!confirmClear) {
+
+return;
+
+}
+
+
+shoppingList = [];
+
+
+saveList();
+
+
+updateDisplay();
+
+}
+
+
+// ======================================
+// BACK
+// ======================================
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+
+// ======================================
+// START
+// ======================================
+
+updateDisplay();
+
+</script>
+
+
+</body>
+
+</html>
